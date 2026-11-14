@@ -30,13 +30,13 @@ export default function StudentRegistrationScreen({ navigation, route }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState(prefilledPhone);
   const [studentId, setStudentId] = useState('');
-  const [course, setCourse] = useState('B.Tech CSE');
-  const [semester, setSemester] = useState('1st Semester');
+  const [course, setCourse] = useState('');
+  const [semester, setSemester] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedAvatar, setSelectedAvatar] = useState(AVATAR_OPTIONS[0].url);
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [emergencyName, setEmergencyName] = useState('');
   const [emergencyPhone, setEmergencyPhone] = useState('');
-  const [emergencyRelation, setEmergencyRelation] = useState('Parent');
+  const [emergencyRelation, setEmergencyRelation] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -48,12 +48,12 @@ export default function StudentRegistrationScreen({ navigation, route }) {
     setIsAlreadyRegistered(false);
 
     if (!name.trim()) {
-      setErrorMessage('Please enter your Full Name (e.g. Abhiraj Srivastava).');
+      setErrorMessage('Please enter your Full Name.');
       return;
     }
 
     if (!studentId.trim()) {
-      setErrorMessage('Please enter your University Roll / Student ID Number (e.g. 25LBCS3354).');
+      setErrorMessage('Please enter your University Roll / Student ID Number.');
       return;
     }
 
@@ -164,10 +164,12 @@ export default function StudentRegistrationScreen({ navigation, route }) {
           <Text style={styles.label}>Full Name *</Text>
           <TextInput
             style={styles.input}
-            placeholder="e.g. Abhiraj Srivastava"
+            placeholder="Enter your full name"
             placeholderTextColor="#71717A"
             value={name}
             onChangeText={setName}
+            autoComplete="off"
+            underlineColorAndroid="transparent"
           />
         </View>
 
@@ -175,11 +177,13 @@ export default function StudentRegistrationScreen({ navigation, route }) {
           <Text style={styles.label}>University Roll / Student ID Number *</Text>
           <TextInput
             style={styles.input}
-            placeholder="e.g. 25LBCS3354"
+            placeholder="Enter University Roll / Student ID"
             placeholderTextColor="#71717A"
             value={studentId}
             onChangeText={setStudentId}
             autoCapitalize="characters"
+            autoComplete="off"
+            underlineColorAndroid="transparent"
           />
         </View>
 
@@ -188,10 +192,12 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             <Text style={styles.label}>Course / Degree *</Text>
             <TextInput
               style={styles.input}
-              placeholder="e.g. B.Tech CSE"
+              placeholder="e.g. B.Tech / BCA"
               placeholderTextColor="#71717A"
               value={course}
               onChangeText={setCourse}
+              autoComplete="off"
+              underlineColorAndroid="transparent"
             />
           </View>
 
@@ -199,10 +205,12 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             <Text style={styles.label}>Semester *</Text>
             <TextInput
               style={styles.input}
-              placeholder="e.g. 1st Semester"
+              placeholder="e.g. 1st / 4th Semester"
               placeholderTextColor="#71717A"
               value={semester}
               onChangeText={setSemester}
+              autoComplete="off"
+              underlineColorAndroid="transparent"
             />
           </View>
         </View>
@@ -244,12 +252,14 @@ export default function StudentRegistrationScreen({ navigation, route }) {
           <Text style={styles.label}>University / Student Email Address *</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter student email (e.g. 25lbcs3354@culkomail.in)"
+            placeholder="Enter university student email address"
             placeholderTextColor="#71717A"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoCapitalize="none"
+            autoComplete="off"
+            underlineColorAndroid="transparent"
           />
         </View>
 
@@ -263,6 +273,8 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             onChangeText={setPhone}
             keyboardType="phone-pad"
             maxLength={10}
+            autoComplete="off"
+            underlineColorAndroid="transparent"
           />
         </View>
 
@@ -275,6 +287,8 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             value={password}
             onChangeText={setPassword}
             secureTextEntry
+            autoComplete="off"
+            underlineColorAndroid="transparent"
           />
         </View>
 
@@ -289,10 +303,12 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             <Text style={styles.label}>Contact Name</Text>
             <TextInput
               style={styles.input}
-              placeholder="e.g. Father / Mother"
+              placeholder="Contact person name (optional)"
               placeholderTextColor="#71717A"
               value={emergencyName}
               onChangeText={setEmergencyName}
+              autoComplete="off"
+              underlineColorAndroid="transparent"
             />
           </View>
 
@@ -300,10 +316,12 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             <Text style={styles.label}>Relationship</Text>
             <TextInput
               style={styles.input}
-              placeholder="Parent / Guardian"
+              placeholder="Relationship (e.g. Parent / Guardian)"
               placeholderTextColor="#71717A"
               value={emergencyRelation}
               onChangeText={setEmergencyRelation}
+              autoComplete="off"
+              underlineColorAndroid="transparent"
             />
           </View>
         </View>
@@ -318,6 +336,8 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             onChangeText={setEmergencyPhone}
             keyboardType="phone-pad"
             maxLength={10}
+            autoComplete="off"
+            underlineColorAndroid="transparent"
           />
         </View>
 
