@@ -176,7 +176,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
               <p className="text-sm sm:text-lg text-zinc-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                 Connect students with cars leaving CUUP campus with peers heading to{' '}
                 <span className="text-white font-bold">Kanpur, Unnao & Lucknow</span>. Share fuel expenses,
-                travel in comfort with standard campus Out Time (4:30 PM), and ride 100% verified.
+                travel in comfort on your daily university schedule, and ride 100% verified.
               </p>
 
               {/* Direct Download & Launch CTA Bar */}
@@ -219,7 +219,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
                 </div>
                 <div className="p-2 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
                   <div className="text-2xl font-black text-zinc-200">4:30 PM</div>
-                  <div className="text-xs text-zinc-400 font-medium mt-0.5">Daily Out-Time</div>
+                  <div className="text-xs text-zinc-400 font-medium mt-0.5">Daily Departures</div>
                 </div>
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
                       <div className="text-xs space-y-1 text-zinc-400">
                         <div className="flex items-center gap-1.5 font-bold text-white">
                           <Clock className="w-3.5 h-3.5 text-zinc-300" />
-                          <span>04:30 PM (Campus Out Time)</span>
+                          <span>04:30 PM Departure</span>
                         </div>
                         <div className="text-[11px] text-zinc-500">CUUP Main Gate ➔ Kanpur Central</div>
                       </div>
@@ -584,7 +584,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
                   </span>
                   <div>
                     <span className="font-bold text-white">Publish your journey:</span> Select destination (Kanpur,
-                    Unnao, Lucknow), pick Out Time (default 4:30 PM), and seats available.
+                    Unnao, Lucknow), pick departure time, and seats available.
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

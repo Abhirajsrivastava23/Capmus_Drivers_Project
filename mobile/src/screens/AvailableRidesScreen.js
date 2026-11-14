@@ -160,7 +160,7 @@ export default function AvailableRidesScreen({ navigation, route }) {
         </View>
         <View style={styles.filterPill}>
           <Ionicons name="time" size={12} color="#A1A1AA" />
-          <Text style={styles.filterPillText}>4:30 PM (Campus Out Time)</Text>
+          <Text style={styles.filterPillText}>04:30 PM Departure</Text>
         </View>
         <View style={styles.filterPill}>
           <Ionicons name="person" size={12} color="#A1A1AA" />

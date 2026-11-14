@@ -98,7 +98,7 @@ export default function SearchRideScreen({ navigation, route }) {
         <View style={styles.departureBadge}>
           <Ionicons name="time-outline" size={15} color="#A1A1AA" />
           <Text style={styles.departureBadgeText}>
-            Standard Campus Departure: 4:30 PM (Daily Out Time)
+            Campus Departure: 4:30 PM onwards
           </Text>
         </View>
 

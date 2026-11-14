@@ -538,7 +538,7 @@ export default function RideDetailsScreen({ navigation, route }) {
                       <View style={[styles.panelBadge, { backgroundColor: '#EFF6FF' }]}>
                         <Ionicons name="time" size={13} color={COLORS.primary} />
                         <Text style={[styles.panelBadgeText, { color: COLORS.primary, fontWeight: '800' }]}>
-                          Out Time: {ride.departure_time}
+                          Departure: {ride.departure_time}
                         </Text>
                       </View>
                     </View>

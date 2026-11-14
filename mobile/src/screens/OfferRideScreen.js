@@ -283,17 +283,16 @@ export default function OfferRideScreen({ navigation }) {
           </View>
         </View>
 
-        {/* Section 2: Campus Out Time */}
+        {/* Section 2: Departure Schedule */}
         <View style={styles.sectionCard}>
-          <Text style={styles.cardHeader}>2. Campus Out Time</Text>
+          <Text style={styles.cardHeader}>2. Departure Schedule</Text>
 
           <View style={styles.inputGroup}>
             <View style={styles.labelRow}>
-              <Text style={styles.label}>Out Time *</Text>
-              <Text style={styles.hintText}>Standard Out Time: 4:30 PM</Text>
+              <Text style={styles.label}>Departure Time *</Text>
             </View>
 
-            {/* Out Time Input with Quick Stepper */}
+            {/* Departure Time Input with Quick Stepper */}
             <View style={styles.timeInputRow}>
               <TouchableOpacity
                 style={styles.stepBtn}
@@ -327,10 +326,10 @@ export default function OfferRideScreen({ navigation }) {
             {/* Quick Time Preset Chips */}
             <View style={styles.timeChipsRow}>
               {[
-                { label: '4:30 PM (Out Time)', val: '04:30 PM' },
-                { label: '5:00 PM', val: '05:00 PM' },
-                { label: '5:30 PM', val: '05:30 PM' },
-                { label: '6:00 PM', val: '06:00 PM' },
+                { label: '04:30 PM', val: '04:30 PM' },
+                { label: '05:00 PM', val: '05:00 PM' },
+                { label: '05:30 PM', val: '05:30 PM' },
+                { label: '06:00 PM', val: '06:00 PM' },
               ].map((t) => (
                 <TouchableOpacity
                   key={t.val}
