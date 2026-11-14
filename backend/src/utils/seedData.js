@@ -455,222 +455,15 @@ const seedData = async () => {
       },
     ]);
 
-    console.log('[Seed] Creating Active & Upcoming Carpool Rides...');
+    console.log('[Seed] Clean database initialized with 0 active rides (rides will appear as students offer them)...');
 
-    // ACTIVE RIDE 1: CUUP Main Gate -> Kanpur (Z Square Mall / Kanpur Central)
-    const activeRide1 = await Ride.create({
-      driver_id: driverAnanya._id,
-      vehicle_id: vehicleAnanya._id,
-      source: 'Chandigarh University UP Campus, Lucknow',
-      destination: 'Kanpur',
-      pickup_location: 'CUUP Main Gate, NH-27',
-      drop_location: 'Z Square Mall / Kanpur Central',
-      journey_date: formatDate(1), // Tomorrow
-      departure_time: '04:30 PM',
-      expected_arrival: '06:15 PM',
-      total_seats: 4,
-      available_seats: 3,
-      booked_seats: 1,
-      cost_per_seat: 180,
-      ac_available: true,
-      luggage_capacity: 'Medium Luggage',
-      instructions: 'Leaving promptly from CUUP main gate. Clean AC car, student ID required at boarding.',
-      ride_status: 'published',
-      share_token: crypto.randomBytes(16).toString('hex'),
-    });
-
-    // ACTIVE RIDE 2: CUUP Gate 2 -> Lucknow (Charbagh Railway Station / Alambagh)
-    const activeRide2 = await Ride.create({
-      driver_id: driverPriya._id,
-      vehicle_id: vehiclePriya._id,
-      source: 'Chandigarh University UP Campus, Lucknow',
-      destination: 'Lucknow',
-      pickup_location: 'CUUP Gate 2, Lucknow',
-      drop_location: 'Charbagh Railway Station / Alambagh Metro',
-      journey_date: formatDate(1), // Tomorrow
-      departure_time: '05:15 PM',
-      expected_arrival: '06:00 PM',
-      total_seats: 4,
-      available_seats: 3,
-      booked_seats: 1,
-      cost_per_seat: 120,
-      ac_available: true,
-      luggage_capacity: 'Medium Luggage',
-      instructions: 'Direct ride to Charbagh via Kanpur road bypass. Polite student co-passengers only.',
-      ride_status: 'published',
-      share_token: crypto.randomBytes(16).toString('hex'),
-    });
-
-    // ACTIVE RIDE 3: CUUP Student Center -> Gomti Nagar / Hazratganj
-    const activeRide3 = await Ride.create({
-      driver_id: driverRohan._id,
-      vehicle_id: vehicleRohan._id,
-      source: 'Chandigarh University UP Campus, Lucknow',
-      destination: 'Gomti Nagar',
-      pickup_location: 'CUUP Student Center, Main Gate',
-      drop_location: 'Patrakarpuram / Hazratganj, Lucknow',
-      journey_date: formatDate(2), // In 2 days
-      departure_time: '09:30 AM',
-      expected_arrival: '10:30 AM',
-      total_seats: 4,
-      available_seats: 2,
-      booked_seats: 2,
-      cost_per_seat: 140,
-      ac_available: true,
-      luggage_capacity: 'Large Suitcases',
-      instructions: 'Spacious sedan with large boot space. AC on throughout. Drop available up to Hazratganj.',
-      ride_status: 'published',
-      share_token: crypto.randomBytes(16).toString('hex'),
-    });
-
-    // ACTIVE RIDE 4: CUUP Main Campus Gate -> Unnao (Bypass / Shukla Ganj)
-    const activeRide4 = await Ride.create({
-      driver_id: driverKartik._id,
-      vehicle_id: vehicleKartik._id,
-      source: 'Chandigarh University UP Campus, Lucknow',
-      destination: 'Unnao',
-      pickup_location: 'CUUP Main Campus Gate',
-      drop_location: 'Unnao Bypass / Shukla Ganj',
-      journey_date: formatDate(2), // In 2 days
-      departure_time: '02:00 PM',
-      expected_arrival: '02:40 PM',
-      total_seats: 4,
-      available_seats: 4,
-      booked_seats: 0,
-      cost_per_seat: 100,
-      ac_available: true,
-      luggage_capacity: 'Large Suitcases',
-      instructions: 'High ground clearance SUV, comfortable travel, strictly verified CUUP students only.',
-      ride_status: 'published',
-      share_token: crypto.randomBytes(16).toString('hex'),
-    });
-
-    console.log('[Seed] Setting up completed past ride & ratings history...');
-
-    // PAST RIDE: Completed Trip for reviews & performance display
-    const pastRide = await Ride.create({
-      driver_id: driverAnanya._id,
-      vehicle_id: vehicleAnanya._id,
-      source: 'Chandigarh University UP Campus, Lucknow',
-      destination: 'Kanpur',
-      pickup_location: 'CUUP Main Gate, NH-27',
-      drop_location: 'Kanpur Central Railway Station',
-      journey_date: formatDate(-3), // 3 days ago
-      departure_time: '04:00 PM',
-      expected_arrival: '05:45 PM',
-      total_seats: 4,
-      available_seats: 0,
-      booked_seats: 4,
-      cost_per_seat: 180,
-      ac_available: true,
-      luggage_capacity: 'Medium Luggage',
-      ride_status: 'completed',
-      share_token: crypto.randomBytes(16).toString('hex'),
-      started_at: new Date(Date.now() - 3 * 86400000),
-      completed_at: new Date(Date.now() - 3 * 86400000 + 6300000),
-    });
-
-    console.log('[Seed] Creating Active & Past Bookings...');
-
-    // Booking on Active Ride 1
-    const activeBooking1 = await Booking.create({
-      ride_id: activeRide1._id,
-      passenger_id: passengerAnanya._id,
-      driver_id: driverAnanya._id,
-      seats_booked: 1,
-      total_cost: 180,
-      booking_status: 'confirmed',
-      payment_status: 'upi_declared',
-      payment_reference: 'UPI/CUUP/2026/884912',
-      pickup_note: 'Waiting right at CUUP main gate security kiosk.',
-    });
-
-    // Booking on Active Ride 2
-    const activeBooking2 = await Booking.create({
-      ride_id: activeRide2._id,
-      passenger_id: passengerDevansh._id,
-      driver_id: driverPriya._id,
-      seats_booked: 1,
-      total_cost: 120,
-      booking_status: 'confirmed',
-      payment_status: 'upi_declared',
-      payment_reference: 'UPI/CUUP/2026/771239',
-      pickup_note: 'Boarding near hostel block 2 road.',
-    });
-
-    // Bookings on Active Ride 3
-    await Booking.create([
-      {
-        ride_id: activeRide3._id,
-        passenger_id: passengerSimran._id,
-        driver_id: driverRohan._id,
-        seats_booked: 1,
-        total_cost: 140,
-        booking_status: 'confirmed',
-        payment_status: 'upi_declared',
-        payment_reference: 'UPI/CUUP/2026/660144',
-      },
-      {
-        ride_id: activeRide3._id,
-        passenger_id: passengerAman._id,
-        driver_id: driverRohan._id,
-        seats_booked: 1,
-        total_cost: 140,
-        booking_status: 'confirmed',
-        payment_status: 'cash_declared',
-      },
-    ]);
-
-    // Booking on Past Completed Ride
-    const pastBooking = await Booking.create({
-      ride_id: pastRide._id,
-      passenger_id: passengerAnanya._id,
-      driver_id: driverAnanya._id,
-      seats_booked: 1,
-      total_cost: 180,
-      booking_status: 'completed',
-      payment_status: 'upi_declared',
-      payment_reference: 'UPI/CUUP/2026/552109',
-      has_reviewed: true,
-    });
-
-    console.log('[Seed] Creating 5-Star Driving Experience Review...');
-    await Review.create({
-      ride_id: pastRide._id,
-      booking_id: pastBooking._id,
-      driver_id: driverAnanya._id,
-      passenger_id: passengerAnanya._id,
-      safety_rating: 5,
-      behaviour_rating: 5,
-      punctuality_rating: 5,
-      communication_rating: 5,
-      overall_rating: 5,
-      review_text:
-        'Ananya is an exceptionally courteous and punctual driver. Followed safe speed on NH-27, no sudden lane changes, and vehicle was spotless. Best carpooling experience at CUUP!',
-    });
-
-    console.log('[Seed] Creating Realistic Campus Notifications...');
+    console.log('[Seed] Creating Welcome Campus Notifications...');
     await Notification.create([
       {
         user_id: passengerAnanya._id,
-        title: 'Ride Confirmed! 🚗',
-        body: 'Your ride to Kanpur with Ananya Sharma has been confirmed. Departure: ' + activeRide1.departure_time,
-        type: 'booking_accepted',
-        data: { ride_id: activeRide1._id, booking_id: activeBooking1._id },
-      },
-      {
-        user_id: passengerDevansh._id,
-        title: 'Seat Reserved Successfully ✅',
-        body: 'Your seat with Priya Verma to Lucknow Charbagh is confirmed.',
-        type: 'booking_accepted',
-        data: { ride_id: activeRide2._id, booking_id: activeBooking2._id },
-      },
-      {
-        user_id: driverAnanya._id,
-        title: 'New Passenger Joined Your Ride 🙋',
-        body: 'Ananya Gupta booked 1 seat on your upcoming trip to Kanpur.',
-        type: 'booking_confirmed',
-        data: { ride_id: activeRide1._id },
+        title: 'Welcome to Campus Drivers! 🎓',
+        body: 'Your Chandigarh University UP student account is ready. Search rides or offer empty car seats!',
+        type: 'system',
       },
     ]);
 
@@ -696,7 +489,6 @@ const seedData = async () => {
     await Report.create({
       reporter_id: passengerDevansh._id,
       reported_user_id: driverRohan._id,
-      ride_id: activeRide3._id,
       report_type: 'other',
       reason: 'Inquiry regarding student carpool rules',
       details: 'Student requested clarification on fuel cost sharing guidelines for daily commuters.',
@@ -721,13 +513,6 @@ const seedData = async () => {
         entity_id: String(driverAnanya._id),
         details: { roll: driverAnanya.student_id, name: driverAnanya.name },
       },
-      {
-        user_id: driverAnanya._id,
-        action: 'RIDE_OFFERED',
-        entity_type: 'Ride',
-        entity_id: String(activeRide1._id),
-        details: { destination: 'Kanpur', vehicle: 'UP32 AB 1234' },
-      },
     ]);
 
     console.log('====================================================');
@@ -736,7 +521,7 @@ const seedData = async () => {
     console.log('👑 Admin Portal Login:');
     console.log('   ID:       campusdrivers000');
     console.log('   Password: campus1010');
-    console.log('🚗 Active Rides Offered: 4 Upcoming Trips (Kanpur, Lucknow, Gomti Nagar, Unnao)');
+    console.log('🚗 Active Rides: 0 (Clean slate; rides will appear in real-time as students offer them)');
     console.log('👥 Total Verified Students & Drivers: 9');
     console.log('📋 Pending ID Verification Reviews: 1 (Ayush Shukla)');
     console.log('====================================================');

@@ -167,13 +167,16 @@ export default function LoginScreen({ navigation }) {
             <View style={styles.inputContainer}>
               <Ionicons name="mail-outline" size={18} color="#A1A1AA" />
               <TextInput
-                style={styles.input}
+                style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
                 placeholder="Enter student email or ID"
                 placeholderTextColor="#71717A"
                 value={loginId}
                 onChangeText={setLoginId}
                 autoCapitalize="none"
                 autoComplete="off"
+                autoCorrect={false}
+                spellCheck={false}
+                importantForAutofill="no"
                 underlineColorAndroid="transparent"
               />
             </View>
@@ -189,13 +192,16 @@ export default function LoginScreen({ navigation }) {
             <View style={styles.inputContainer}>
               <Ionicons name="lock-closed-outline" size={18} color="#A1A1AA" />
               <TextInput
-                style={styles.input}
+                style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
                 placeholder="Enter password"
                 placeholderTextColor="#71717A"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
                 autoComplete="off"
+                autoCorrect={false}
+                spellCheck={false}
+                importantForAutofill="no"
                 underlineColorAndroid="transparent"
               />
             </View>
@@ -227,7 +233,7 @@ export default function LoginScreen({ navigation }) {
               <Ionicons name="call-outline" size={18} color="#A1A1AA" />
               <Text style={styles.prefix}>+91</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
                 placeholder="10-digit mobile number"
                 placeholderTextColor="#71717A"
                 value={phone}
@@ -235,6 +241,9 @@ export default function LoginScreen({ navigation }) {
                 keyboardType="phone-pad"
                 maxLength={10}
                 autoComplete="off"
+                autoCorrect={false}
+                spellCheck={false}
+                importantForAutofill="no"
                 underlineColorAndroid="transparent"
               />
             </View>
@@ -246,7 +255,7 @@ export default function LoginScreen({ navigation }) {
               <View style={styles.inputContainer}>
                 <Ionicons name="shield-checkmark-outline" size={18} color="#A1A1AA" />
                 <TextInput
-                  style={styles.input}
+                  style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
                   placeholder="Enter 6-digit code"
                   placeholderTextColor="#71717A"
                   value={otp}
@@ -254,6 +263,9 @@ export default function LoginScreen({ navigation }) {
                   keyboardType="numeric"
                   maxLength={6}
                   autoComplete="off"
+                  autoCorrect={false}
+                  spellCheck={false}
+                  importantForAutofill="no"
                   underlineColorAndroid="transparent"
                 />
               </View>

@@ -413,28 +413,46 @@ export default function HomeScreen({ navigation }) {
         </ScrollView>
 
         {/* Dynamic Available Rides Feed: Shows here as soon as someone registers/offers a ride */}
-        {rides.length > 0 && (
-          <View style={{ marginTop: 22 }}>
-            <View style={styles.sectionHeader}>
-              <View>
-                <Text style={styles.sectionTitle}>Available Student Rides</Text>
-                <Text style={styles.sectionSubtitle}>Verified peers leaving soon from campus</Text>
-              </View>
+        <View style={{ marginTop: 22 }}>
+          <View style={styles.sectionHeader}>
+            <View>
+              <Text style={styles.sectionTitle}>Available Student Rides</Text>
+              <Text style={styles.sectionSubtitle}>Verified peers leaving soon from campus</Text>
+            </View>
+            {rides.length > 0 && (
               <TouchableOpacity onPress={() => navigation.navigate('FindRideTab')}>
                 <Text style={styles.seeAllText}>View All ({rides.length})</Text>
               </TouchableOpacity>
-            </View>
+            )}
+          </View>
 
-            {rides.map((ride) => (
+          {rides.length === 0 ? (
+            <View style={styles.emptyRidesCard}>
+              <Ionicons name="car-outline" size={32} color="#52525B" />
+              <Text style={styles.emptyRidesTitle}>No Rides Offered Yet</Text>
+              <Text style={styles.emptyRidesSub}>
+                Rides will appear here in real-time as students publish their campus journeys.
+              </Text>
+              <TouchableOpacity
+                style={styles.offerFirstRideBtn}
+                activeOpacity={0.85}
+                onPress={() => navigation.navigate('OfferRideTab')}
+              >
+                <Ionicons name="add-circle-outline" size={16} color="#000000" />
+                <Text style={styles.offerFirstRideBtnText}>Offer the First Ride</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            rides.map((ride) => (
               <RideCard
                 key={ride._id}
                 ride={ride}
                 onPress={() => navigation.navigate('RideDetails', { rideId: ride._id })}
                 onBookNow={() => navigation.navigate('RideDetails', { rideId: ride._id })}
               />
-            ))}
-          </View>
-        )}
+            ))
+          )}
+        </View>
 
         <View style={{ height: 40 }} />
       </ScrollView>
@@ -976,5 +994,44 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '800',
     color: '#000000',
+  },
+  emptyRidesCard: {
+    backgroundColor: '#111217',
+    borderWidth: 1,
+    borderColor: '#27272A',
+    borderRadius: 18,
+    padding: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    marginTop: 8,
+  },
+  emptyRidesTitle: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: 4,
+  },
+  emptyRidesSub: {
+    fontSize: 12,
+    color: '#71717A',
+    textAlign: 'center',
+    lineHeight: 18,
+    maxWidth: 280,
+  },
+  offerFirstRideBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginTop: 8,
+  },
+  offerFirstRideBtnText: {
+    color: '#000000',
+    fontSize: 13,
+    fontWeight: '800',
   },
 });

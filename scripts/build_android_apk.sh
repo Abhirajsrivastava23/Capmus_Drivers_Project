@@ -89,8 +89,11 @@ mkdir -p admin-web/dist/downloads
 mkdir -p backend/public/downloads
 
 cp "$WORKDIR/CampusDrivers_v1.0.0.apk" admin-web/public/downloads/CampusDrivers_v1.0.0.apk
+cp "$WORKDIR/CampusDrivers_v1.0.0.apk" admin-web/public/downloads/CampusDrivers_v1.0.1.apk
 cp "$WORKDIR/CampusDrivers_v1.0.0.apk" admin-web/dist/downloads/CampusDrivers_v1.0.0.apk
+cp "$WORKDIR/CampusDrivers_v1.0.0.apk" admin-web/dist/downloads/CampusDrivers_v1.0.1.apk
 cp "$WORKDIR/CampusDrivers_v1.0.0.apk" backend/public/downloads/CampusDrivers_v1.0.0.apk
+cp "$WORKDIR/CampusDrivers_v1.0.0.apk" backend/public/downloads/CampusDrivers_v1.0.1.apk
 
 # Clean intermediate compiler artifacts to save disk space
 echo "11. Cleaning intermediate build cache..."

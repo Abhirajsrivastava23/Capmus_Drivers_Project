@@ -43,21 +43,19 @@ export default function VideoIntroAnimation({ onComplete }) {
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // 4-second opening buffer ticker (0% -> 100% in 3800ms)
+    // Snappy executive opening animation ticker (0% -> 100% in 1800ms)
     const startTime = Date.now();
-    const duration = 3800;
+    const duration = 1800;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const pct = Math.min(100, (elapsed / duration) * 100);
       setProgress(pct);
 
-      if (pct < 28) {
+      if (pct < 35) {
         setBufferText('Connecting to Campus Drivers...');
-      } else if (pct < 65) {
-        setBufferText('Loading UP Highway Corridor...');
-      } else if (pct < 95) {
-        setBufferText('Launching Official Platform...');
+      } else if (pct < 75) {
+        setBufferText('Loading NH-27 Corridor...');
       } else {
         setBufferText('Welcome to Campus Drivers');
       }
@@ -66,7 +64,7 @@ export default function VideoIntroAnimation({ onComplete }) {
         clearInterval(interval);
         handleFinish();
       }
-    }, 30);
+    }, 20);
 
     return () => {
       clearInterval(interval);
@@ -88,7 +86,8 @@ export default function VideoIntroAnimation({ onComplete }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[99999] w-screen h-screen bg-black flex items-center justify-center overflow-hidden transition-opacity duration-500 select-none ${
+      onClick={handleFinish}
+      className={`fixed inset-0 z-[99999] w-screen h-screen bg-black flex items-center justify-center overflow-hidden transition-opacity duration-500 select-none cursor-pointer ${
         isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
       }`}
     >

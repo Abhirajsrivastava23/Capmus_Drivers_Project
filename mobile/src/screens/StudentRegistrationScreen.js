@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
@@ -163,12 +164,15 @@ export default function StudentRegistrationScreen({ navigation, route }) {
         <View style={styles.formGroup}>
           <Text style={styles.label}>Full Name *</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
             placeholder="Enter your full name"
             placeholderTextColor="#71717A"
             value={name}
             onChangeText={setName}
             autoComplete="off"
+            autoCorrect={false}
+            spellCheck={false}
+            importantForAutofill="no"
             underlineColorAndroid="transparent"
           />
         </View>
@@ -176,13 +180,16 @@ export default function StudentRegistrationScreen({ navigation, route }) {
         <View style={styles.formGroup}>
           <Text style={styles.label}>University Roll / Student ID Number *</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
             placeholder="Enter University Roll / Student ID"
             placeholderTextColor="#71717A"
             value={studentId}
             onChangeText={setStudentId}
             autoCapitalize="characters"
             autoComplete="off"
+            autoCorrect={false}
+            spellCheck={false}
+            importantForAutofill="no"
             underlineColorAndroid="transparent"
           />
         </View>
@@ -191,12 +198,15 @@ export default function StudentRegistrationScreen({ navigation, route }) {
           <View style={[styles.formGroup, { flex: 1.2 }]}>
             <Text style={styles.label}>Course / Degree *</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
               placeholder="e.g. B.Tech / BCA"
               placeholderTextColor="#71717A"
               value={course}
               onChangeText={setCourse}
               autoComplete="off"
+              autoCorrect={false}
+              spellCheck={false}
+              importantForAutofill="no"
               underlineColorAndroid="transparent"
             />
           </View>
@@ -204,12 +214,15 @@ export default function StudentRegistrationScreen({ navigation, route }) {
           <View style={[styles.formGroup, { flex: 1 }]}>
             <Text style={styles.label}>Semester *</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
               placeholder="e.g. 1st / 4th Semester"
               placeholderTextColor="#71717A"
               value={semester}
               onChangeText={setSemester}
               autoComplete="off"
+              autoCorrect={false}
+              spellCheck={false}
+              importantForAutofill="no"
               underlineColorAndroid="transparent"
             />
           </View>
@@ -251,7 +264,7 @@ export default function StudentRegistrationScreen({ navigation, route }) {
         <View style={styles.formGroup}>
           <Text style={styles.label}>University / Student Email Address *</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
             placeholder="Enter university student email address"
             placeholderTextColor="#71717A"
             value={email}
@@ -259,6 +272,9 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             keyboardType="email-address"
             autoCapitalize="none"
             autoComplete="off"
+            autoCorrect={false}
+            spellCheck={false}
+            importantForAutofill="no"
             underlineColorAndroid="transparent"
           />
         </View>
@@ -266,7 +282,7 @@ export default function StudentRegistrationScreen({ navigation, route }) {
         <View style={styles.formGroup}>
           <Text style={styles.label}>Mobile Phone Number *</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
             placeholder="10-digit mobile number"
             placeholderTextColor="#71717A"
             value={phone}
@@ -274,6 +290,9 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             keyboardType="phone-pad"
             maxLength={10}
             autoComplete="off"
+            autoCorrect={false}
+            spellCheck={false}
+            importantForAutofill="no"
             underlineColorAndroid="transparent"
           />
         </View>
@@ -281,13 +300,16 @@ export default function StudentRegistrationScreen({ navigation, route }) {
         <View style={styles.formGroup}>
           <Text style={styles.label}>Account Password *</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
             placeholder="Create password (minimum 6 characters)"
             placeholderTextColor="#71717A"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
             autoComplete="off"
+            autoCorrect={false}
+            spellCheck={false}
+            importantForAutofill="no"
             underlineColorAndroid="transparent"
           />
         </View>
@@ -302,12 +324,15 @@ export default function StudentRegistrationScreen({ navigation, route }) {
           <View style={[styles.formGroup, { flex: 1.2 }]}>
             <Text style={styles.label}>Contact Name</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
               placeholder="Contact person name (optional)"
               placeholderTextColor="#71717A"
               value={emergencyName}
               onChangeText={setEmergencyName}
               autoComplete="off"
+              autoCorrect={false}
+              spellCheck={false}
+              importantForAutofill="no"
               underlineColorAndroid="transparent"
             />
           </View>
@@ -315,12 +340,15 @@ export default function StudentRegistrationScreen({ navigation, route }) {
           <View style={[styles.formGroup, { flex: 1 }]}>
             <Text style={styles.label}>Relationship</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
               placeholder="Relationship (e.g. Parent / Guardian)"
               placeholderTextColor="#71717A"
               value={emergencyRelation}
               onChangeText={setEmergencyRelation}
               autoComplete="off"
+              autoCorrect={false}
+              spellCheck={false}
+              importantForAutofill="no"
               underlineColorAndroid="transparent"
             />
           </View>
@@ -329,7 +357,7 @@ export default function StudentRegistrationScreen({ navigation, route }) {
         <View style={styles.formGroup}>
           <Text style={styles.label}>Emergency Phone Number</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, Platform.OS === 'web' && { outline: 'none', outlineWidth: 0, boxShadow: 'none' }]}
             placeholder="10-digit emergency number (optional)"
             placeholderTextColor="#71717A"
             value={emergencyPhone}
@@ -337,6 +365,9 @@ export default function StudentRegistrationScreen({ navigation, route }) {
             keyboardType="phone-pad"
             maxLength={10}
             autoComplete="off"
+            autoCorrect={false}
+            spellCheck={false}
+            importantForAutofill="no"
             underlineColorAndroid="transparent"
           />
         </View>

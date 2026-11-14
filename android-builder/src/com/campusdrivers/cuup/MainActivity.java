@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 
         // Mobile responsiveness and screen scaling
         settings.setUseWideViewPort(true);
-        settings.setLoadWithOverviewMode(false);
+        settings.setLoadWithOverviewMode(true);
         settings.setTextZoom(100);
         settings.setSupportZoom(false);
         settings.setDisplayZoomControls(false);

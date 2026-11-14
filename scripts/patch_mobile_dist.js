@@ -130,7 +130,7 @@ let fontsCss = `
   font-display: swap;
 }
 
-/* Universal Focus Outline / Golden Ring Remover */
+/* Universal Focus Outline / Golden / Blue Ring Remover */
 * {
   -webkit-tap-highlight-color: transparent !important;
 }
@@ -139,13 +139,17 @@ textarea,
 select,
 button,
 [contenteditable],
-[tabindex] {
+[tabindex],
+[data-focusable="true"],
+[role="textbox"] {
   outline: none !important;
   outline-width: 0 !important;
   outline-style: none !important;
   outline-color: transparent !important;
   box-shadow: none !important;
+  -webkit-box-shadow: none !important;
   -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
 }
 input:focus,
 input:focus-visible,
@@ -153,6 +157,10 @@ input:active,
 textarea:focus,
 textarea:focus-visible,
 textarea:active,
+[data-focusable="true"]:focus,
+[data-focusable="true"]:focus-visible,
+[role="textbox"]:focus,
+[role="textbox"]:focus-visible,
 *:focus,
 *:focus-visible,
 *:focus-within {
@@ -161,6 +169,18 @@ textarea:active,
   outline-style: none !important;
   outline-color: transparent !important;
   box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -webkit-focus-ring-color: transparent !important;
+}
+/* Prevent Chrome / WebView Autofill background color from turning yellow/white/blue */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #14151D inset !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 `;
 
@@ -187,13 +207,17 @@ let html = `<!DOCTYPE html>
       select,
       button,
       [contenteditable],
-      [tabindex] {
+      [tabindex],
+      [data-focusable="true"],
+      [role="textbox"] {
         outline: none !important;
         outline-width: 0 !important;
         outline-style: none !important;
         outline-color: transparent !important;
         box-shadow: none !important;
+        -webkit-box-shadow: none !important;
         -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
       }
       input:focus,
       input:focus-visible,
@@ -201,6 +225,10 @@ let html = `<!DOCTYPE html>
       textarea:focus,
       textarea:focus-visible,
       textarea:active,
+      [data-focusable="true"]:focus,
+      [data-focusable="true"]:focus-visible,
+      [role="textbox"]:focus,
+      [role="textbox"]:focus-visible,
       *:focus,
       *:focus-visible,
       *:focus-within {
@@ -209,6 +237,17 @@ let html = `<!DOCTYPE html>
         outline-style: none !important;
         outline-color: transparent !important;
         box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        -webkit-focus-ring-color: transparent !important;
+      }
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover, 
+      input:-webkit-autofill:focus, 
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px #14151D inset !important;
+        -webkit-text-fill-color: #FFFFFF !important;
+        caret-color: #FFFFFF !important;
+        transition: background-color 5000s ease-in-out 0s;
       }
       html,
       body {

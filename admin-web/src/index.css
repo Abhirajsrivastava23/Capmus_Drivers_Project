@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+  :root,
   html,
   body {
     background-color: #090A0D !important;
@@ -10,16 +11,44 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
+    min-width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
     -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
   }
 
   #root {
     width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
+    min-width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
     background-color: #090A0D;
     min-height: 100vh;
+  }
+
+  /* Universal Focus Outline Line Remover */
+  input, textarea, select, button, [contenteditable], [tabindex] {
+    outline: none !important;
+    outline-width: 0 !important;
+    outline-style: none !important;
+    outline-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  input:focus,
+  input:focus-visible,
+  input:active,
+  textarea:focus,
+  textarea:focus-visible,
+  textarea:active,
+  *:focus,
+  *:focus-visible,
+  *:focus-within {
+    outline: none !important;
+    outline-width: 0 !important;
+    outline-style: none !important;
+    outline-color: transparent !important;
+    box-shadow: none !important;
   }
 }

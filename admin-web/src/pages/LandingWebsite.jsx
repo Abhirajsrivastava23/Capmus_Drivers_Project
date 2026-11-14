@@ -74,14 +74,14 @@ export default function LandingWebsite({ onOpenAdmin }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#090A0D] text-zinc-100 font-sans selection:bg-zinc-700 selection:text-white w-full max-w-[100vw] overflow-x-hidden">
-      {/* 🎬 Fullscreen Edge-to-Edge Intro Video Animation (No Skip, Pure Animation First) */}
+    <div className="min-h-screen bg-[#090A0D] text-zinc-100 font-sans selection:bg-zinc-700 selection:text-white w-full max-w-full overflow-x-hidden">
+      {/* 🎬 Fullscreen Edge-to-Edge Intro Video Animation */}
       {showIntro && (
         <VideoIntroAnimation onComplete={() => setShowIntro(false)} />
       )}
 
       {/* 🚀 TOP NAVIGATION BAR - Sleek Obsidian & Silver Hairline */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#090A0D]/95 border-b border-zinc-800/80 w-full max-w-[100vw]">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#090A0D]/95 border-b border-zinc-800/80 w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
             <div
@@ -151,7 +151,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </nav>
 
       {/* 🌟 HERO SECTION - Monochrome Luxury */}
-      <section className="relative overflow-hidden pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-20 lg:pb-32 w-full max-w-[100vw]">
+      <section className="relative overflow-hidden pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-20 lg:pb-32 w-full max-w-full">
         {/* Subtle Silver Glow Effects - constrained so they can never cause horizontal scroll */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-[500px] h-60 sm:h-[300px] bg-white/[0.03] blur-[80px] sm:blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute top-1/3 right-0 sm:right-10 w-48 sm:w-[300px] h-48 sm:h-[220px] bg-zinc-400/[0.04] blur-[70px] sm:blur-[100px] rounded-full pointer-events-none" />
@@ -184,14 +184,14 @@ export default function LandingWebsite({ onOpenAdmin }) {
                 <button
                   onClick={handleDownloadApk}
                   disabled={isDownloading}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-white via-zinc-100 to-zinc-200 hover:from-zinc-100 hover:to-white text-zinc-950 font-black text-sm px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-xl shadow-white/10 border border-white/60 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-white via-zinc-100 to-zinc-200 hover:from-zinc-100 hover:to-white text-zinc-950 font-black text-sm px-4 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-xl shadow-white/10 border border-white/60 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <Download className="w-5 h-5 text-zinc-950 shrink-0" />
                   <div className="text-left">
                     <div className="text-[10px] uppercase tracking-wider font-extrabold text-zinc-700">
                       {isDownloading ? 'Downloading...' : 'Direct Release'}
                     </div>
-                    <div className="text-sm font-black whitespace-nowrap">Download Android APK (v1.0)</div>
+                    <div className="text-xs sm:text-sm font-black">Download Android APK (v1.0)</div>
                   </div>
                 </button>
 
@@ -199,7 +199,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
                   href="/app"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-100 font-bold text-sm px-6 py-3.5 sm:py-4 rounded-2xl border border-zinc-700 shadow-lg shadow-black/40 transition-all hover:border-zinc-500"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-100 font-bold text-sm px-4 sm:px-6 py-3.5 sm:py-4 rounded-2xl border border-zinc-700 shadow-lg shadow-black/40 transition-all hover:border-zinc-500"
                 >
                   <Smartphone className="w-5 h-5 text-zinc-300 shrink-0" />
                   <span>Launch Web App</span>
@@ -208,18 +208,18 @@ export default function LandingWebsite({ onOpenAdmin }) {
               </div>
 
               {/* Verified Trust Stats - Black, White & Silver */}
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-zinc-800/90 max-w-lg mx-auto lg:mx-0">
-                <div className="p-2 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
-                  <div className="text-2xl font-black text-white">100%</div>
-                  <div className="text-xs text-zinc-400 font-medium mt-0.5">Verified Students</div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-zinc-800/90 max-w-lg mx-auto lg:mx-0">
+                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
+                  <div className="text-xl sm:text-2xl font-black text-white">100%</div>
+                  <div className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-0.5">Verified Students</div>
                 </div>
-                <div className="p-2 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
-                  <div className="text-2xl font-black text-zinc-100">₹80 - ₹250</div>
-                  <div className="text-xs text-zinc-400 font-medium mt-0.5">Fair Fuel Share</div>
+                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
+                  <div className="text-xl sm:text-2xl font-black text-zinc-100">₹80 - ₹250</div>
+                  <div className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-0.5">Fair Fuel Share</div>
                 </div>
-                <div className="p-2 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
-                  <div className="text-2xl font-black text-zinc-200">4:30 PM</div>
-                  <div className="text-xs text-zinc-400 font-medium mt-0.5">Daily Departures</div>
+                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
+                  <div className="text-xl sm:text-2xl font-black text-zinc-200">4:30 PM</div>
+                  <div className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-0.5">Daily Departures</div>
                 </div>
               </div>
             </div>
@@ -364,7 +364,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 🛣️ POPULAR NH-27 CORRIDOR ROUTES & FARES - Brushed Obsidian Cards */}
-      <section id="routes" className="py-16 sm:py-20 bg-zinc-950/60 border-y border-zinc-800/80 w-full max-w-[100vw] overflow-hidden">
+      <section id="routes" className="py-16 sm:py-20 bg-zinc-950/60 border-y border-zinc-800/80 w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-extrabold text-zinc-400 uppercase tracking-widest mb-3">
@@ -426,7 +426,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 📥 DOWNLOAD APK CENTER - Executive Black, Titanium & Silver */}
-      <section id="download" className="py-16 sm:py-24 relative overflow-hidden w-full max-w-[100vw]">
+      <section id="download" className="py-16 sm:py-24 relative overflow-hidden w-full max-w-full">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-[#121319] via-[#0E0F14] to-[#0A0A0E] rounded-[24px] sm:rounded-[36px] p-5 sm:p-12 lg:p-16 border border-zinc-700/80 relative shadow-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -511,7 +511,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 🛡️ CAMPUS SAFETY & VERIFICATION */}
-      <section id="safety" className="py-16 sm:py-20 bg-zinc-950/40 border-t border-zinc-800/80 w-full max-w-[100vw] overflow-hidden">
+      <section id="safety" className="py-16 sm:py-20 bg-zinc-950/40 border-t border-zinc-800/80 w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
             <h2 className="text-xs font-extrabold text-zinc-400 uppercase tracking-widest mb-3">
@@ -567,7 +567,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 🧭 HOW IT WORKS */}
-      <section id="how-it-works" className="py-16 sm:py-20 border-t border-zinc-800/80 w-full max-w-[100vw] overflow-hidden">
+      <section id="how-it-works" className="py-16 sm:py-20 border-t border-zinc-800/80 w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* For Drivers */}

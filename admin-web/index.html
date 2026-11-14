@@ -2,21 +2,60 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Campus Drivers – Chandigarh University UP (Official Portal)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-      html, body {
+      :root, html, body {
         background-color: #090A0D !important;
         color: #F4F4F5;
         font-family: 'Plus Jakarta Sans', sans-serif;
         margin: 0;
         padding: 0;
         width: 100%;
-        max-width: 100vw;
-        overflow-x: hidden;
+        min-width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      /* Universal Focus Outline / Blue / Yellow Ring Remover */
+      input, textarea, select, button, [contenteditable], [tabindex] {
+        outline: none !important;
+        outline-width: 0 !important;
+        outline-style: none !important;
+        outline-color: transparent !important;
+        box-shadow: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+      }
+      input:focus,
+      input:focus-visible,
+      input:active,
+      textarea:focus,
+      textarea:focus-visible,
+      textarea:active,
+      *:focus,
+      *:focus-visible,
+      *:focus-within {
+        outline: none !important;
+        outline-width: 0 !important;
+        outline-style: none !important;
+        outline-color: transparent !important;
+        box-shadow: none !important;
+      }
+      /* Prevent Autofill from turning inputs blue/yellow/white */
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover, 
+      input:-webkit-autofill:focus, 
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 1000px #14151D inset !important;
+        -webkit-text-fill-color: #FFFFFF !important;
+        caret-color: #FFFFFF !important;
+        transition: background-color 5000s ease-in-out 0s;
       }
     </style>
     <!-- ⚡ Global Immediate Shortcut Listener for Admin Portal (Ctrl+C / Cmd+C) -->
