@@ -38,15 +38,15 @@ const seedData = async () => {
 
     console.log('[Seed] Creating Admin and Student accounts...');
 
-    // 1. Admin
+    // 1. Admin (Official dedicated campusdrivers000 / campus1010)
     const admin = await User.create({
-      name: 'Chandigarh University Admin',
-      email: 'admin@campusdrivers.cu.ac.in',
+      name: 'Campus Drivers Administration',
+      email: 'campusdrivers000@campusdrivers.cu.ac.in',
       phone: '9876543210',
-      student_id: 'CUUP-ADMIN-01',
+      student_id: 'CAMPUSDRIVERS000',
       course: 'Office of Student Welfare & Transport',
       semester: 'Staff',
-      password: 'Password@123',
+      password: 'campus1010',
       verification_status: 'verified',
       role: 'admin',
       emergency_contact: {

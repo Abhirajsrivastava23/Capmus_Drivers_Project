@@ -4,8 +4,8 @@ import { Shield, Lock, Mail, AlertCircle, ArrowRight } from 'lucide-react';
 
 export default function LoginPage({ onBackToWebsite }) {
   const { login } = useAdminAuth();
-  const [loginId, setLoginId] = useState('admin@campusdrivers.cu.ac.in');
-  const [password, setPassword] = useState('Password@123');
+  const [loginId, setLoginId] = useState('campusdrivers000');
+  const [password, setPassword] = useState('campus1010');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
@@ -50,7 +50,7 @@ export default function LoginPage({ onBackToWebsite }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1.5">
-              Admin Email / Staff ID
+              Admin Credential / Staff ID
             </label>
             <div className="relative">
               <Mail className="absolute left-3.5 top-3.5 text-zinc-500" size={18} />
@@ -59,7 +59,7 @@ export default function LoginPage({ onBackToWebsite }) {
                 required
                 value={loginId}
                 onChange={(e) => setLoginId(e.target.value)}
-                placeholder="admin@campusdrivers.cu.ac.in"
+                placeholder="campusdrivers000"
                 className="w-full pl-11 pr-4 py-3 bg-zinc-900/90 border border-zinc-700 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:bg-zinc-900 transition"
               />
             </div>
@@ -67,7 +67,7 @@ export default function LoginPage({ onBackToWebsite }) {
 
           <div>
             <label className="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-1.5">
-              Secure Password
+              Secure Admin Password
             </label>
             <div className="relative">
               <Lock className="absolute left-3.5 top-3.5 text-zinc-500" size={18} />
@@ -76,7 +76,7 @@ export default function LoginPage({ onBackToWebsite }) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
+                placeholder="campus1010"
                 className="w-full pl-11 pr-4 py-3 bg-zinc-900/90 border border-zinc-700 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:bg-zinc-900 transition"
               />
             </div>

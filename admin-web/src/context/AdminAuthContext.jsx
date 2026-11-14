@@ -33,6 +33,17 @@ export const AdminAuthProvider = ({ children }) => {
   }, []);
 
   const login = async (loginId, password) => {
+    const clean = (loginId || '').trim().toLowerCase();
+    const validIds = ['campusdrivers000', 'campusdrivers000.', 'campusdrivers000@campusdrivers.cu.ac.in'];
+    
+    // Enforce strict dedicated admin credential requirement
+    if (!validIds.includes(clean)) {
+      throw new Error('Access restricted: Only authorized admin credential (campusdrivers000) is permitted to access the Admin Portal.');
+    }
+    if (password !== 'campus1010') {
+      throw new Error('Incorrect password. Please enter the authorized admin password.');
+    }
+
     const res = await api.post('/auth/login', { loginId, password });
     if (res.data.success) {
       if (res.data.user.role !== 'admin') {

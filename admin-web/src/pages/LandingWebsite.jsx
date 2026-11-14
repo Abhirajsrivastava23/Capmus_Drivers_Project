@@ -130,10 +130,14 @@ export default function LandingWebsite({ onOpenAdmin }) {
 
             <button
               onClick={onOpenAdmin}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-zinc-800 to-zinc-700 hover:from-zinc-700 hover:to-zinc-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-zinc-600/70 shadow-md shadow-black/30 transition-all hover:scale-[1.02] whitespace-nowrap"
+              title="Open Admin Portal (Shortcut: Ctrl+C)"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-zinc-800 to-zinc-700 hover:from-zinc-700 hover:to-zinc-600 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl border border-zinc-600/70 shadow-md shadow-black/30 transition-all hover:scale-[1.02] whitespace-nowrap"
             >
               <Shield className="w-3.5 h-3.5 text-zinc-300" />
               <span>Admin Portal</span>
+              <kbd className="hidden sm:inline-block text-[10px] bg-black/50 px-1.5 py-0.5 rounded text-zinc-300 font-mono border border-zinc-700/80">
+                Ctrl+C
+              </kbd>
             </button>
           </div>
         </div>

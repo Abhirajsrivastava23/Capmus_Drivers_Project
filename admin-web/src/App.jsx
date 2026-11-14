@@ -193,6 +193,35 @@ export default function App() {
     }
   };
 
+  // ⌨️ Global Shortcut: Ctrl+C (and Cmd+C without text selection) opens Admin Portal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const isC = e.key === 'c' || e.key === 'C' || e.code === 'KeyC' || e.keyCode === 67;
+
+      // 1. Direct Ctrl+C (Dedicated shortcut on Mac & Windows)
+      if (e.ctrlKey && isC) {
+        e.preventDefault();
+        handleOpenAdmin();
+        return;
+      }
+
+      // 2. Cmd+C on Mac when not copying text in an input
+      if (e.metaKey && isC) {
+        const activeTag = document.activeElement?.tagName?.toLowerCase();
+        const isInput = activeTag === 'input' || activeTag === 'textarea' || document.activeElement?.isContentEditable;
+        const selectedText = window.getSelection()?.toString();
+
+        if (!isInput && (!selectedText || selectedText.trim().length === 0)) {
+          e.preventDefault();
+          handleOpenAdmin();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   if (viewMode === 'website') {
     return <LandingWebsite onOpenAdmin={handleOpenAdmin} />;
   }

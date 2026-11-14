@@ -128,6 +128,29 @@ const startServer = async () => {
         { $or: [{ name: /Aarav/i }, { email: 'aarav.sharma@cumail.in' }] },
         { name: 'Ananya Sharma' }
       );
+
+      // Ensure dedicated admin credentials: campusdrivers000 / campus1010
+      const adminUser = await User.findOne({ role: 'admin' });
+      if (adminUser) {
+        adminUser.student_id = 'CAMPUSDRIVERS000';
+        adminUser.password = 'campus1010';
+        adminUser.name = 'Campus Drivers Administration';
+        await adminUser.save();
+        console.log('[Server] Dedicated admin account updated: campusdrivers000 / campus1010');
+      } else {
+        await User.create({
+          name: 'Campus Drivers Administration',
+          email: 'campusdrivers000@campusdrivers.cu.ac.in',
+          phone: '9876543210',
+          student_id: 'CAMPUSDRIVERS000',
+          course: 'Office of Student Welfare & Transport',
+          semester: 'Staff',
+          password: 'campus1010',
+          verification_status: 'verified',
+          role: 'admin',
+        });
+        console.log('[Server] Dedicated admin account created: campusdrivers000 / campus1010');
+      }
     }
 
     server.listen(PORT, () => {
