@@ -482,6 +482,10 @@ const styles = StyleSheet.create({
     height: 48,
     fontSize: 13.5,
     color: '#FFFFFF',
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   submitButton: {
     backgroundColor: '#FFFFFF',

@@ -234,6 +234,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontSize: 12.5,
     color: '#FFFFFF',
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   submitReportBtn: {
     backgroundColor: COLORS.danger,

@@ -426,6 +426,10 @@ const styles = StyleSheet.create({
     height: 42,
     fontSize: 12,
     color: '#FFFFFF',
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   saveContactBtn: {
     backgroundColor: '#FFFFFF',

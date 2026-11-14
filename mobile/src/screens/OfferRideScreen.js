@@ -587,6 +587,10 @@ const styles = StyleSheet.create({
     height: 46,
     fontSize: 13,
     color: '#FFFFFF',
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   quickCitiesRow: {
     marginBottom: 12,

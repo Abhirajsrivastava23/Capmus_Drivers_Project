@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  Platform,
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
@@ -18,9 +19,9 @@ import api from '../services/api';
 export default function LoginScreen({ navigation }) {
   const { login } = useAuth();
   const [loginMethod, setLoginMethod] = useState('password'); // 'password' or 'otp'
-  const [loginId, setLoginId] = useState('aarav.sharma@cumail.in');
-  const [password, setPassword] = useState('Password@123');
-  const [phone, setPhone] = useState('9876500001');
+  const [loginId, setLoginId] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -151,25 +152,6 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      {/* Demo Credentials Pill */}
-      <View style={styles.demoBox}>
-        <Text style={styles.demoTitle}>Quick Demo Switcher:</Text>
-        <View style={styles.demoButtons}>
-          <TouchableOpacity
-            style={styles.demoPill}
-            onPress={() => pickDemoAccount('driver')}
-          >
-            <Text style={styles.demoPillText}>🚗 Driver (Aarav - UP32 AB 1234)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.demoPill}
-            onPress={() => pickDemoAccount('passenger')}
-          >
-            <Text style={styles.demoPillText}>🙋 Passenger (Ananya)</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
       {errorMessage ? (
         <View style={styles.errorBox}>
           <Ionicons name="alert-circle" size={16} color="#F87171" />
@@ -186,11 +168,13 @@ export default function LoginScreen({ navigation }) {
               <Ionicons name="mail-outline" size={18} color="#A1A1AA" />
               <TextInput
                 style={styles.input}
-                placeholder="e.g. aarav.sharma@cumail.in"
+                placeholder="Enter student email or ID"
                 placeholderTextColor="#71717A"
                 value={loginId}
                 onChangeText={setLoginId}
                 autoCapitalize="none"
+                autoComplete="off"
+                underlineColorAndroid="transparent"
               />
             </View>
           </View>
@@ -211,6 +195,8 @@ export default function LoginScreen({ navigation }) {
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
+                autoComplete="off"
+                underlineColorAndroid="transparent"
               />
             </View>
           </View>
@@ -248,6 +234,8 @@ export default function LoginScreen({ navigation }) {
                 onChangeText={setPhone}
                 keyboardType="phone-pad"
                 maxLength={10}
+                autoComplete="off"
+                underlineColorAndroid="transparent"
               />
             </View>
           </View>
@@ -265,6 +253,8 @@ export default function LoginScreen({ navigation }) {
                   onChangeText={setOtp}
                   keyboardType="numeric"
                   maxLength={6}
+                  autoComplete="off"
+                  underlineColorAndroid="transparent"
                 />
               </View>
             </View>
@@ -479,6 +469,11 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     color: '#FFFFFF',
+    borderWidth: 0,
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   submitButton: {
     backgroundColor: '#FFFFFF',

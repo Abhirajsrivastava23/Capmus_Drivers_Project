@@ -403,6 +403,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#FFFFFF',
     textAlignVertical: 'top',
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   submitBtn: {
     backgroundColor: '#FFFFFF',
