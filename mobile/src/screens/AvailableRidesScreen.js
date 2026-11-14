@@ -353,6 +353,9 @@ const styles = StyleSheet.create({
   listContent: {
     padding: 20,
     paddingBottom: 40,
+    width: '100%',
+    maxWidth: 580,
+    alignSelf: 'center',
   },
   centered: {
     flex: 1,

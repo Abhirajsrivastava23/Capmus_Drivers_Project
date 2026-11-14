@@ -2,14 +2,22 @@ import axios from 'axios';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Smart URL configuration depending on environment
+// Primary cloud production URL + local WiFi fallback
+export const CLOUD_API_BASE = 'https://capmusdriversproject.vercel.app/api';
+export const LOCAL_WIFI_BASE = 'http://192.168.51.113:5001/api';
+
 const getBaseUrl = () => {
-  if (Platform.OS === 'android') {
-    // Android emulator alias for host machine localhost
-    return 'http://10.0.2.2:5001/api';
+  if (Platform.OS === 'web') {
+    if (
+      typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ) {
+      return 'http://localhost:5001/api';
+    }
+    return CLOUD_API_BASE;
   }
-  // For web, iOS simulator, or local network
-  return 'http://localhost:5001/api';
+  // Android APK on real device
+  return CLOUD_API_BASE;
 };
 
 export const API_BASE = getBaseUrl();
@@ -19,7 +27,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15000,
+  timeout: 10000,
 });
 
 export const setAuthToken = (token) => {
@@ -41,5 +49,26 @@ api.interceptors.request.use(async (config) => {
   }
   return config;
 });
+
+// Resilient fallback interceptor: if Cloud fails, retry with local WiFi backend
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (
+      originalRequest &&
+      !originalRequest._retry &&
+      (error.response?.status === 500 || error.code === 'ERR_NETWORK' || !error.response)
+    ) {
+      originalRequest._retry = true;
+      if (originalRequest.baseURL === CLOUD_API_BASE) {
+        console.log('[API] Falling back to local WiFi backend:', LOCAL_WIFI_BASE);
+        originalRequest.baseURL = LOCAL_WIFI_BASE;
+        return api.request(originalRequest);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

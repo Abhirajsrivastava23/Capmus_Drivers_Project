@@ -595,6 +595,9 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+    width: '100%',
+    maxWidth: 580,
+    alignSelf: 'center',
   },
   searchBarCard: {
     flexDirection: 'row',

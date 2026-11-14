@@ -66,12 +66,15 @@ if [ ! -f "$WORKDIR/release.keystore" ]; then
 fi
 
 # 8. Sign APK with apksigner (v1 + v2 + v3 signatures)
-echo "8. Signing APK with apksigner..."
+echo "8. Signing APK with apksigner (enforcing V1 JAR + V2 + V3 signatures for all Android phones)..."
 "$BUILD_TOOLS/apksigner" sign \
   --ks "$WORKDIR/release.keystore" \
   --ks-pass pass:campusdrivers123 \
   --ks-key-alias campusdrivers \
   --key-pass pass:campusdrivers123 \
+  --v1-signing-enabled true \
+  --v2-signing-enabled true \
+  --v3-signing-enabled true \
   --out "$WORKDIR/CampusDrivers_v1.0.0.apk" \
   "$WORKDIR/build/aligned.apk"
 

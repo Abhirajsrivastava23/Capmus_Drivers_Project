@@ -147,6 +147,16 @@ export default function VideoAdSplash({ onFinish }) {
           />
         )}
 
+        {/* Top Right Skip Button */}
+        <TouchableOpacity
+          style={styles.skipBtn}
+          onPress={onFinish}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.skipBtnText}>Skip</Text>
+          <Ionicons name="play-forward" size={12} color="#D4D4D8" />
+        </TouchableOpacity>
+
         {/* 🚀 NICHE BEECH ME: 4-SECOND OPENING BUFFER CARD */}
         <View style={styles.bufferCard}>
           <View style={styles.bufferHeader}>
@@ -313,5 +323,25 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 11,
     fontWeight: '600',
+  },
+  skipBtn: {
+    position: 'absolute',
+    top: 48,
+    right: 20,
+    zIndex: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(24, 24, 27, 0.85)',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#3F3F46',
+  },
+  skipBtnText: {
+    color: '#D4D4D8',
+    fontSize: 12,
+    fontWeight: '700',
   },
 });

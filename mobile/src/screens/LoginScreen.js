@@ -94,17 +94,17 @@ export default function LoginScreen({ navigation }) {
 
   const pickDemoAccount = (type) => {
     if (type === 'driver') {
-      setLoginId('aarav.sharma@cumail.in');
+      setLoginId('ananya.sharma@cumail.in');
       setPassword('Password@123');
       setPhone('9876500001');
     } else if (type === 'passenger') {
       setLoginId('ananya.gupta@cumail.in');
       setPassword('Password@123');
-      setPhone('9876500002');
+      setPhone('9876500004');
     } else if (type === 'admin') {
-      setLoginId('admin@campusdrivers.cu.ac.in');
-      setPassword('Password@123');
-      setPhone('9999900000');
+      setLoginId('campusdrivers000');
+      setPassword('campus1010');
+      setPhone('9876543210');
     }
   };
 
@@ -320,8 +320,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#090A0D',
   },
   content: {
-    padding: 24,
-    paddingTop: 54,
+    padding: 20,
+    paddingTop: 48,
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
   },
   header: {
     flexDirection: 'row',
