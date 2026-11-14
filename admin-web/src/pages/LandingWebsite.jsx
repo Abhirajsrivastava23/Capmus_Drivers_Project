@@ -74,20 +74,20 @@ export default function LandingWebsite({ onOpenAdmin }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#090A0D] text-zinc-100 font-sans selection:bg-zinc-700 selection:text-white">
+    <div className="min-h-screen bg-[#090A0D] text-zinc-100 font-sans selection:bg-zinc-700 selection:text-white w-full max-w-[100vw] overflow-x-hidden">
       {/* 🎬 Fullscreen Edge-to-Edge Intro Video Animation (No Skip, Pure Animation First) */}
       {showIntro && (
         <VideoIntroAnimation onComplete={() => setShowIntro(false)} />
       )}
 
       {/* 🚀 TOP NAVIGATION BAR - Sleek Obsidian & Silver Hairline */}
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#090A0D]/90 border-b border-zinc-800/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 shrink-0">
+      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#090A0D]/95 border-b border-zinc-800/80 w-full max-w-[100vw]">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
             <div
               onClick={onOpenAdmin}
               title="Campus Drivers – Click or press Ctrl+C for Admin"
-              className="w-12 h-12 rounded-2xl overflow-hidden border border-zinc-700/80 shadow-lg shadow-black/40 bg-black flex items-center justify-center shrink-0 cursor-pointer"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl overflow-hidden border border-zinc-700/80 shadow-lg shadow-black/40 bg-black flex items-center justify-center shrink-0 cursor-pointer"
             >
               <img
                 src="/assets/campus_f1_square.png"
@@ -95,17 +95,21 @@ export default function LandingWebsite({ onOpenAdmin }) {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="shrink-0">
-              <div className="flex items-center gap-2 whitespace-nowrap">
-                <span className="font-extrabold text-xl text-white tracking-tight whitespace-nowrap">Campus Drivers</span>
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-extrabold text-base sm:text-xl text-white tracking-tight whitespace-nowrap">
+                  Campus Drivers
+                </span>
                 <span
                   onClick={onOpenAdmin}
-                  className="bg-zinc-800/90 hover:bg-zinc-700 text-zinc-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-zinc-700 whitespace-nowrap cursor-pointer transition"
+                  className="bg-zinc-800/90 hover:bg-zinc-700 text-zinc-300 text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full border border-zinc-700 whitespace-nowrap cursor-pointer transition"
                 >
                   CUUP Official
                 </span>
               </div>
-              <p className="text-xs text-zinc-400 whitespace-nowrap">Chandigarh University Uttar Pradesh (NH-27)</p>
+              <p className="hidden sm:block text-xs text-zinc-400 whitespace-nowrap">
+                Chandigarh University Uttar Pradesh (NH-27)
+              </p>
             </div>
           </div>
 
@@ -124,12 +128,12 @@ export default function LandingWebsite({ onOpenAdmin }) {
             </a>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <a
-              href="http://localhost:8081"
+              href="/app"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 text-xs font-bold px-4 py-2.5 rounded-xl border border-zinc-700/80 transition-all hover:border-zinc-500 hover:text-white whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-2 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 text-xs font-bold px-4 py-2.5 rounded-xl border border-zinc-700/80 transition-all hover:border-zinc-500 hover:text-white whitespace-nowrap"
             >
               <span>Launch Web App</span>
               <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
@@ -137,9 +141,9 @@ export default function LandingWebsite({ onOpenAdmin }) {
 
             <button
               onClick={handleDownloadApk}
-              className="inline-flex items-center gap-2 bg-white hover:bg-zinc-200 text-black text-xs font-extrabold px-4 py-2.5 rounded-xl shadow-md shadow-white/10 transition-all hover:scale-[1.02] whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 sm:gap-2 bg-white hover:bg-zinc-200 text-black text-xs font-extrabold px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-md shadow-white/10 transition-all hover:scale-[1.02] whitespace-nowrap"
             >
-              <Download className="w-3.5 h-3.5 text-black" />
+              <Download className="w-3.5 h-3.5 text-black shrink-0" />
               <span>Download APK</span>
             </button>
           </div>
@@ -147,21 +151,21 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </nav>
 
       {/* 🌟 HERO SECTION - Monochrome Luxury */}
-      <section className="relative overflow-hidden pt-12 pb-24 lg:pt-20 lg:pb-32">
-        {/* Subtle Silver Glow Effects */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-white/[0.03] blur-[140px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[350px] h-[260px] bg-zinc-400/[0.04] blur-[120px] rounded-full pointer-events-none" />
+      <section className="relative overflow-hidden pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-20 lg:pb-32 w-full max-w-[100vw]">
+        {/* Subtle Silver Glow Effects - constrained so they can never cause horizontal scroll */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-[500px] h-60 sm:h-[300px] bg-white/[0.03] blur-[80px] sm:blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 right-0 sm:right-10 w-48 sm:w-[300px] h-48 sm:h-[220px] bg-zinc-400/[0.04] blur-[70px] sm:blur-[100px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             {/* Left Column: Headlines & Download CTAs */}
-            <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-700/80 text-zinc-300 text-xs font-semibold shadow-inner">
-                <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
-                <span>Student-Only Ride Sharing • NH-27 Corridor</span>
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-zinc-900/90 border border-zinc-700/80 text-zinc-300 text-xs font-semibold shadow-inner max-w-full">
+                <Sparkles className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                <span className="truncate">Student-Only Ride Sharing • NH-27 Corridor</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.12]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15] break-words">
                 Carpooling made exclusively for{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-400">
                   Chandigarh University
@@ -169,37 +173,37 @@ export default function LandingWebsite({ onOpenAdmin }) {
                 Students
               </h1>
 
-              <p className="text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+              <p className="text-sm sm:text-lg text-zinc-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                 Connect students with cars leaving CUUP campus with peers heading to{' '}
                 <span className="text-white font-bold">Kanpur, Unnao & Lucknow</span>. Share fuel expenses,
                 travel in comfort with standard campus Out Time (4:30 PM), and ride 100% verified.
               </p>
 
               {/* Direct Download & Launch CTA Bar */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2 w-full">
                 <button
                   onClick={handleDownloadApk}
                   disabled={isDownloading}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-white via-zinc-100 to-zinc-200 hover:from-zinc-100 hover:to-white text-zinc-950 font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-white/10 border border-white/60 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-white via-zinc-100 to-zinc-200 hover:from-zinc-100 hover:to-white text-zinc-950 font-black text-sm px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-xl shadow-white/10 border border-white/60 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <Download className="w-5 h-5 text-zinc-950" />
+                  <Download className="w-5 h-5 text-zinc-950 shrink-0" />
                   <div className="text-left">
                     <div className="text-[10px] uppercase tracking-wider font-extrabold text-zinc-700">
                       {isDownloading ? 'Downloading...' : 'Direct Release'}
                     </div>
-                    <div className="text-sm font-black">Download Android APK (v1.0)</div>
+                    <div className="text-sm font-black whitespace-nowrap">Download Android APK (v1.0)</div>
                   </div>
                 </button>
 
                 <a
-                  href="http://localhost:8081"
+                  href="/app"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-100 font-bold text-sm px-6 py-4 rounded-2xl border border-zinc-700 shadow-lg shadow-black/40 transition-all hover:border-zinc-500"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-100 font-bold text-sm px-6 py-3.5 sm:py-4 rounded-2xl border border-zinc-700 shadow-lg shadow-black/40 transition-all hover:border-zinc-500"
                 >
-                  <Smartphone className="w-5 h-5 text-zinc-300" />
+                  <Smartphone className="w-5 h-5 text-zinc-300 shrink-0" />
                   <span>Launch Web App</span>
-                  <ArrowRight className="w-4 h-4 text-zinc-400" />
+                  <ArrowRight className="w-4 h-4 text-zinc-400 shrink-0" />
                 </a>
               </div>
 
@@ -221,7 +225,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
             </div>
 
             {/* Right Column: Official CU F1 Drivers Banner & Phone Mockup */}
-            <div className="lg:col-span-5 flex flex-col items-center gap-6">
+            <div className="lg:col-span-5 flex flex-col items-center gap-6 w-full max-w-full overflow-hidden">
               {/* Official CU Campus Drivers Poster Card */}
               <div className="w-full max-w-[340px] rounded-3xl overflow-hidden border border-zinc-700/80 bg-[#121318] shadow-2xl shadow-black/80 group">
                 <div className="relative h-44 overflow-hidden bg-black flex items-center justify-center">
@@ -244,7 +248,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
               </div>
 
               {/* Phone Mockup Showcase */}
-              <div className="relative w-[320px] sm:w-[340px] rounded-[44px] bg-[#121318] p-3.5 shadow-2xl shadow-black/80 border-4 border-zinc-700">
+              <div className="relative w-full max-w-[320px] sm:max-w-[340px] mx-auto rounded-[36px] sm:rounded-[44px] bg-[#121318] p-3 sm:p-3.5 shadow-2xl shadow-black/80 border-4 border-zinc-700">
                 {/* Speaker Notch */}
                 <div className="absolute top-7 left-1/2 -translate-x-1/2 w-28 h-4 bg-zinc-950 rounded-full z-30 flex items-center justify-center border border-zinc-800">
                   <div className="w-3 h-3 rounded-full bg-zinc-800 ml-12" />
@@ -360,7 +364,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 🛣️ POPULAR NH-27 CORRIDOR ROUTES & FARES - Brushed Obsidian Cards */}
-      <section id="routes" className="py-20 bg-zinc-950/60 border-y border-zinc-800/80">
+      <section id="routes" className="py-16 sm:py-20 bg-zinc-950/60 border-y border-zinc-800/80 w-full max-w-[100vw] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-extrabold text-zinc-400 uppercase tracking-widest mb-3">
@@ -422,38 +426,38 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 📥 DOWNLOAD APK CENTER - Executive Black, Titanium & Silver */}
-      <section id="download" className="py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-[#121319] via-[#0E0F14] to-[#0A0A0E] rounded-[36px] p-8 sm:p-12 lg:p-16 border border-zinc-700/80 relative shadow-2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-8 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 text-zinc-300 text-xs font-bold">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-zinc-300" />
-                  <span>Latest Release v1.0.0 (Official Build)</span>
+      <section id="download" className="py-16 sm:py-24 relative overflow-hidden w-full max-w-[100vw]">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-[#121319] via-[#0E0F14] to-[#0A0A0E] rounded-[24px] sm:rounded-[36px] p-5 sm:p-12 lg:p-16 border border-zinc-700/80 relative shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              <div className="lg:col-span-8 space-y-5 sm:space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 text-zinc-300 text-xs font-bold max-w-full">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-zinc-300 shrink-0" />
+                  <span className="truncate">Latest Release v1.0.0 (Official Build)</span>
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
                   Download the Official Campus Drivers Android APK
                 </h2>
 
-                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                <p className="text-zinc-300 text-xs sm:text-base leading-relaxed">
                   Install the standalone release directly on your Android phone without needing Play Store login.
                   Built with fast socket updates, emergency SOS triggers, and verified Chandigarh University UP
                   student authorization.
                 </p>
 
                 {/* File Specs & Download Button */}
-                <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                   <button
                     onClick={handleDownloadApk}
                     disabled={isDownloading}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white hover:bg-zinc-200 text-black font-black text-sm px-8 py-4 rounded-2xl shadow-xl shadow-white/10 transition-all hover:scale-[1.02] active:scale-[0.98] border border-zinc-300"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 sm:gap-3 bg-white hover:bg-zinc-200 text-black font-black text-xs sm:text-sm px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl shadow-xl shadow-white/10 transition-all hover:scale-[1.02] active:scale-[0.98] border border-zinc-300"
                   >
-                    <Download className="w-5 h-5 text-black" />
+                    <Download className="w-5 h-5 text-black shrink-0" />
                     <span>{isDownloading ? 'Downloading File...' : 'Download Campus Drivers APK (v1.0 • 34 MB)'}</span>
                   </button>
 
-                  <div className="text-xs text-zinc-400 flex items-center gap-2 font-medium">
+                  <div className="text-xs text-zinc-400 flex items-center justify-center sm:justify-start gap-2 font-medium">
                     <span className="w-2 h-2 rounded-full bg-zinc-300 animate-pulse" />
                     <span>{downloadCount}+ students downloaded this week</span>
                   </div>
@@ -507,13 +511,13 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 🛡️ CAMPUS SAFETY & VERIFICATION */}
-      <section id="safety" className="py-20 bg-zinc-950/40 border-t border-zinc-800/80">
+      <section id="safety" className="py-16 sm:py-20 bg-zinc-950/40 border-t border-zinc-800/80 w-full max-w-[100vw] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
             <h2 className="text-xs font-extrabold text-zinc-400 uppercase tracking-widest mb-3">
               Student Safety Protocols
             </h2>
-            <p className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <p className="text-2xl sm:text-4xl font-black text-white tracking-tight">
               Strict Verification for Chandigarh University Students
             </p>
           </div>
@@ -563,7 +567,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
       </section>
 
       {/* 🧭 HOW IT WORKS */}
-      <section id="how-it-works" className="py-20 border-t border-zinc-800/80">
+      <section id="how-it-works" className="py-16 sm:py-20 border-t border-zinc-800/80 w-full max-w-[100vw] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* For Drivers */}
@@ -669,7 +673,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
               Download APK (v1.0)
             </button>
             <a
-              href="http://localhost:8081"
+              href="/app"
               target="_blank"
               rel="noreferrer"
               className="hover:text-white transition-colors font-bold"
