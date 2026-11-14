@@ -142,6 +142,10 @@ exports.offerRide = async (req, res, next) => {
 // @access  Public (can view preview, booking requires verified login)
 exports.searchRides = async (req, res, next) => {
   try {
+    if (require('mongoose').connection.readyState !== 1) {
+      return res.status(200).json({ success: true, count: 0, rides: [] });
+    }
+
     const {
       destination,
       journey_date,
@@ -680,6 +684,10 @@ exports.broadcastRideRequest = async (req, res, next) => {
 // @access  Public
 exports.getActiveRideRequests = async (req, res, next) => {
   try {
+    if (require('mongoose').connection.readyState !== 1) {
+      return res.status(200).json({ success: true, count: 0, requests: [] });
+    }
+
     const requests = await RideRequest.find({ status: 'pending' })
       .sort({ createdAt: -1 })
       .limit(15);

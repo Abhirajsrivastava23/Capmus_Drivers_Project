@@ -5,6 +5,10 @@ const Notification = require('../models/Notification');
 // @access  Private
 exports.getNotifications = async (req, res, next) => {
   try {
+    if (require('mongoose').connection.readyState !== 1) {
+      return res.status(200).json({ success: true, unreadCount: 0, notifications: [] });
+    }
+
     const notifications = await Notification.find({ user_id: req.user._id })
       .sort({ createdAt: -1 })
       .limit(50);
