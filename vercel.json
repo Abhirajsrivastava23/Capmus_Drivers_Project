@@ -11,6 +11,13 @@
       "entrypoint": "src/server.js"
     }
   },
+  "redirects": [
+    {
+      "source": "/app",
+      "destination": "/app/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",

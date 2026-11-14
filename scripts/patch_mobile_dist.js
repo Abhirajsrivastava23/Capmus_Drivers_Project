@@ -197,6 +197,13 @@ let html = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#090A0D" />
     <title>Campus Drivers</title>
+    <script>
+      (function() {
+        if (window.location.protocol !== 'file:' && window.location.pathname === '/app') {
+          window.location.replace('/app/' + window.location.search + window.location.hash);
+        }
+      })();
+    </script>
     <link rel="stylesheet" href="./fonts.css" />
     <style id="expo-reset">
       * {
@@ -297,4 +304,13 @@ for (const target of targetDirs) {
   fs.rmSync(target, { recursive: true, force: true });
   fs.cpSync(distDir, target, { recursive: true });
 }
+
+// ALSO Copy _expo and fonts.css to admin-web root so requests from /app (no trailing slash) succeed immediately!
+const rootPublic = path.resolve(__dirname, '../admin-web/public');
+const rootDist = path.resolve(__dirname, '../admin-web/dist');
+fs.cpSync(path.join(distDir, 'fonts.css'), path.join(rootPublic, 'fonts.css'));
+fs.cpSync(path.join(distDir, 'fonts.css'), path.join(rootDist, 'fonts.css'));
+fs.cpSync(path.join(distDir, '_expo'), path.join(rootPublic, '_expo'), { recursive: true });
+fs.cpSync(path.join(distDir, '_expo'), path.join(rootDist, '_expo'), { recursive: true });
+console.log('Synced _expo and fonts.css to admin-web root as well!');
 console.log('Sync complete!');
