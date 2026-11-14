@@ -83,8 +83,9 @@ app.get('/api/health', (req, res) => {
     app: 'Campus Drivers API',
     university: 'Chandigarh University Uttar Pradesh (Lucknow Campus)',
     version: '1.0.1',
-    hasMongoUri: Boolean(process.env.MONGODB_URI),
-    mongooseState: mongoose.connection.readyState,
+    database: 'Supabase PostgreSQL',
+    supabaseConnected: Boolean(process.env.SUPABASE_URL),
+    supabaseUrl: process.env.SUPABASE_URL || 'https://vtpdjthdqlpathniuqvu.supabase.co',
     timestamp: new Date().toISOString(),
   });
 });

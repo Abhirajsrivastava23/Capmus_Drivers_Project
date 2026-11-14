@@ -32,8 +32,8 @@ export default function LandingWebsite({ onOpenAdmin }) {
 
     // Trigger download
     const link = document.createElement('a');
-    link.href = '/downloads/CampusDrivers_v1.0.0.apk';
-    link.setAttribute('download', 'CampusDrivers_v1.0.0.apk');
+    link.href = '/downloads/CampusDrivers_v1.0.1.apk';
+    link.setAttribute('download', 'CampusDrivers_v1.0.1.apk');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -191,7 +191,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
                     <div className="text-[10px] uppercase tracking-wider font-extrabold text-zinc-700">
                       {isDownloading ? 'Downloading...' : 'Direct Release'}
                     </div>
-                    <div className="text-xs sm:text-sm font-black">Download Android APK (v1.0)</div>
+                    <div className="text-xs sm:text-sm font-black">Download Android APK (v1.0.1)</div>
                   </div>
                 </button>
 
@@ -208,18 +208,18 @@ export default function LandingWebsite({ onOpenAdmin }) {
               </div>
 
               {/* Verified Trust Stats - Black, White & Silver */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-zinc-800/90 max-w-lg mx-auto lg:mx-0">
-                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
-                  <div className="text-xl sm:text-2xl font-black text-white">100%</div>
-                  <div className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-0.5">Verified Students</div>
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-4 pt-4 border-t border-zinc-800/90 max-w-lg mx-auto lg:mx-0 w-full overflow-hidden">
+                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left min-w-0">
+                  <div className="text-sm sm:text-2xl font-black text-white truncate">100%</div>
+                  <div className="text-[9px] sm:text-xs text-zinc-400 font-medium mt-0.5 truncate">Verified Students</div>
                 </div>
-                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
-                  <div className="text-xl sm:text-2xl font-black text-zinc-100">₹80 - ₹250</div>
-                  <div className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-0.5">Fair Fuel Share</div>
+                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left min-w-0">
+                  <div className="text-sm sm:text-2xl font-black text-zinc-100 truncate">₹80 - ₹250</div>
+                  <div className="text-[9px] sm:text-xs text-zinc-400 font-medium mt-0.5 truncate">Fair Fuel Share</div>
                 </div>
-                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left">
-                  <div className="text-xl sm:text-2xl font-black text-zinc-200">4:30 PM</div>
-                  <div className="text-[10px] sm:text-xs text-zinc-400 font-medium mt-0.5">Daily Departures</div>
+                <div className="p-2 sm:p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60 text-center lg:text-left min-w-0">
+                  <div className="text-sm sm:text-2xl font-black text-zinc-200 truncate">4:30 PM</div>
+                  <div className="text-[9px] sm:text-xs text-zinc-400 font-medium mt-0.5 truncate">Daily Departures</div>
                 </div>
               </div>
             </div>
@@ -670,7 +670,7 @@ export default function LandingWebsite({ onOpenAdmin }) {
 
           <div className="flex items-center gap-6">
             <button onClick={handleDownloadApk} className="hover:text-white transition-colors font-bold">
-              Download APK (v1.0)
+              Download APK (v1.0.1)
             </button>
             <a
               href="/app/"

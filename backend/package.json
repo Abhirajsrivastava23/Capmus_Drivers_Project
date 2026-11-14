@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
+    "build": "node -e \"console.log('Backend build ready')\"",
     "dev": "nodemon src/server.js",
     "seed": "node src/utils/seedData.js",
     "test": "node tests/api.test.js"
@@ -21,6 +22,7 @@
   "author": "Campus Drivers Team",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
