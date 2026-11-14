@@ -59,7 +59,8 @@ export default function LoginPage({ onBackToWebsite }) {
                 required
                 value={loginId}
                 onChange={(e) => setLoginId(e.target.value)}
-                placeholder="campusdrivers000"
+                placeholder="Enter Admin ID"
+                autoComplete="off"
                 className="w-full pl-11 pr-4 py-3 bg-zinc-900/90 border border-zinc-700 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:bg-zinc-900 transition"
               />
             </div>
@@ -76,7 +77,8 @@ export default function LoginPage({ onBackToWebsite }) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="campus1010"
+                placeholder="••••••••••••"
+                autoComplete="new-password"
                 className="w-full pl-11 pr-4 py-3 bg-zinc-900/90 border border-zinc-700 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:bg-zinc-900 transition"
               />
             </div>
