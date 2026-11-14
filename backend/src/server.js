@@ -153,20 +153,28 @@ const startServer = async () => {
       }
     }
 
-    server.listen(PORT, () => {
-      console.log('========================================================');
-      console.log(`🚀 Campus Drivers Backend Server is LIVE on port ${PORT}`);
-      console.log(`📍 Designed for Chandigarh University Uttar Pradesh`);
-      console.log(`🔗 API Base: http://localhost:${PORT}/api`);
-      console.log(`🏥 Health Check: http://localhost:${PORT}/api/health`);
-      console.log('========================================================');
-    });
+    if (!process.env.VERCEL) {
+      server.listen(PORT, () => {
+        console.log('========================================================');
+        console.log(`🚀 Campus Drivers Backend Server is LIVE on port ${PORT}`);
+        console.log(`📍 Designed for Chandigarh University Uttar Pradesh`);
+        console.log(`🔗 API Base: http://localhost:${PORT}/api`);
+        console.log(`🏥 Health Check: http://localhost:${PORT}/api/health`);
+        console.log('========================================================');
+      });
+    } else {
+      console.log('🚀 Campus Drivers Express app initialized for Vercel Serverless environment.');
+    }
   } catch (err) {
     console.error('Failed to start Campus Drivers server:', err);
-    process.exit(1);
+    if (!process.env.VERCEL) {
+      process.exit(1);
+    }
   }
 };
 
 startServer();
 
-module.exports = { app, server };
+module.exports = app;
+module.exports.app = app;
+module.exports.server = server;

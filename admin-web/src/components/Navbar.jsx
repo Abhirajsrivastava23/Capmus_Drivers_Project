@@ -31,7 +31,7 @@ export default function Navbar({ onRefresh, isRefreshing, title, subtitle, onBac
 
         <div className="flex items-center gap-2 pl-4 border-l border-zinc-200 text-xs text-zinc-500 font-medium">
           <ShieldCheck size={16} className="text-zinc-800" />
-          <span>System Status: <strong className="text-zinc-900">Healthy (Port 5001)</strong></span>
+          <span>System Status: <strong className="text-zinc-900">Online</strong></span>
         </div>
       </div>
     </header>
