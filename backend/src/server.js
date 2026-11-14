@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 dotenv.config();
 
@@ -81,9 +82,27 @@ app.get('/api/health', (req, res) => {
     status: 'online',
     app: 'Campus Drivers API',
     university: 'Chandigarh University Uttar Pradesh (Lucknow Campus)',
-    version: '1.0.0',
+    version: '1.0.1',
+    hasMongoUri: Boolean(process.env.MONGODB_URI),
+    mongooseState: mongoose.connection.readyState,
     timestamp: new Date().toISOString(),
   });
+});
+
+// Ensure database is connected for every incoming API request (Serverless safe)
+app.use(async (req, res, next) => {
+  if (req.path === '/api/health' || req.path.startsWith('/downloads')) {
+    return next();
+  }
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      await connectDB();
+    }
+    next();
+  } catch (err) {
+    console.error('[DB Middleware Error]', err.message);
+    next(err);
+  }
 });
 
 // Mount API routes
