@@ -4,8 +4,8 @@ import { Shield, Lock, Mail, AlertCircle, ArrowRight } from 'lucide-react';
 
 export default function LoginPage({ onBackToWebsite }) {
   const { login } = useAdminAuth();
-  const [loginId, setLoginId] = useState('campusdrivers000');
-  const [password, setPassword] = useState('campus1010');
+  const [loginId, setLoginId] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 

@@ -5,31 +5,13 @@ const AdminAuthContext = createContext();
 
 export const AdminAuthProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
+  // Require fresh ID and password entry whenever Admin Portal is opened
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem('campus_drivers_admin_token');
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await api.get('/auth/me');
-        if (res.data.success && res.data.user.role === 'admin') {
-          setAdmin(res.data.user);
-        } else {
-          localStorage.removeItem('campus_drivers_admin_token');
-        }
-      } catch (err) {
-        localStorage.removeItem('campus_drivers_admin_token');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAuth();
+    localStorage.removeItem('campus_drivers_admin_token');
+    setAdmin(null);
+    setLoading(false);
   }, []);
 
   const login = async (loginId, password) => {

@@ -180,6 +180,9 @@ export default function App() {
   });
 
   const handleOpenAdmin = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('campus_drivers_admin_token');
+    }
     setViewMode('admin');
     if (typeof window !== 'undefined' && window.history) {
       if (window.location.search.indexOf('view=admin') === -1) {
@@ -189,6 +192,9 @@ export default function App() {
   };
 
   const handleBackToWebsite = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('campus_drivers_admin_token');
+    }
     setViewMode('website');
     if (typeof window !== 'undefined' && window.history) {
       window.history.pushState({}, '', '/');
