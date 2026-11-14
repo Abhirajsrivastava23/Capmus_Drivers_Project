@@ -1,0 +1,13 @@
+{
+  "name": "campus-drivers-root",
+  "version": "1.0.0",
+  "description": "Campus Drivers - Student Carpooling & Ride Sharing Application for Chandigarh University UP (Lucknow Campus)",
+  "private": true,
+  "scripts": {
+    "start:backend": "cd backend && npm start",
+    "start:admin": "cd admin-web && npm run dev",
+    "start:mobile": "cd mobile && npx expo start",
+    "test:backend": "cd backend && npm test",
+    "seed": "cd backend && npm run seed"
+  }
+}
