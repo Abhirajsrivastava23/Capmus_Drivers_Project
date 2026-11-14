@@ -685,6 +685,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: '#FFFFFF',
+    borderWidth: 0,
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   timeChipsRow: {
     flexDirection: 'row',

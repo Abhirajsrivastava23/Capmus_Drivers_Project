@@ -129,6 +129,39 @@ let fontsCss = `
   src: url('data:font/truetype;charset=utf-8;base64,${faB64}') format('truetype');
   font-display: swap;
 }
+
+/* Universal Focus Outline / Golden Ring Remover */
+* {
+  -webkit-tap-highlight-color: transparent !important;
+}
+input,
+textarea,
+select,
+button,
+[contenteditable],
+[tabindex] {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+input:focus,
+input:focus-visible,
+input:active,
+textarea:focus,
+textarea:focus-visible,
+textarea:active,
+*:focus,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  box-shadow: none !important;
+}
 `;
 
 fs.writeFileSync(path.join(distDir, 'fonts.css'), fontsCss);
@@ -146,6 +179,37 @@ let html = `<!DOCTYPE html>
     <title>Campus Drivers</title>
     <link rel="stylesheet" href="./fonts.css" />
     <style id="expo-reset">
+      * {
+        -webkit-tap-highlight-color: transparent !important;
+      }
+      input,
+      textarea,
+      select,
+      button,
+      [contenteditable],
+      [tabindex] {
+        outline: none !important;
+        outline-width: 0 !important;
+        outline-style: none !important;
+        outline-color: transparent !important;
+        box-shadow: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+      }
+      input:focus,
+      input:focus-visible,
+      input:active,
+      textarea:focus,
+      textarea:focus-visible,
+      textarea:active,
+      *:focus,
+      *:focus-visible,
+      *:focus-within {
+        outline: none !important;
+        outline-width: 0 !important;
+        outline-style: none !important;
+        outline-color: transparent !important;
+        box-shadow: none !important;
+      }
       html,
       body {
         height: 100%;

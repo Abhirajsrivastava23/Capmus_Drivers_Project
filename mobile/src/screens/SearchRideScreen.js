@@ -59,6 +59,8 @@ export default function SearchRideScreen({ navigation, route }) {
               placeholderTextColor="#71717A"
               value={destination}
               onChangeText={setDestination}
+              underlineColorAndroid="transparent"
+              autoComplete="off"
             />
             {destination ? (
               <TouchableOpacity onPress={() => setDestination('')}>
@@ -221,6 +223,11 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 13,
     color: '#FFFFFF',
+    borderWidth: 0,
+    outlineStyle: 'none',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    boxShadow: 'none',
   },
   chipsSection: {
     marginBottom: 18,
