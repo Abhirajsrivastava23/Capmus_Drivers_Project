@@ -18,11 +18,19 @@ const connectDB = async () => {
       console.log(`[Database] MongoDB Connected: ${conn.connection.host}/${conn.connection.name}`);
       return conn;
     } catch (err) {
-      console.warn(`[Database] External MongoDB connection failed: ${err.message}. Falling back to embedded MongoMemoryServer...`);
+      console.warn(`[Database] External MongoDB connection failed: ${err.message}.`);
+      if (process.env.VERCEL) {
+        return null;
+      }
     }
   }
 
-  // Fallback to MongoMemoryServer for immediate zero-config out-of-the-box operation
+  if (process.env.VERCEL) {
+    console.warn('[Database] Running on Vercel without external MONGODB_URI. Memory server is skipped in serverless.');
+    return null;
+  }
+
+  // Fallback to MongoMemoryServer for immediate zero-config out-of-the-box operation (local dev only)
   try {
     const { MongoMemoryServer } = require('mongodb-memory-server');
     mongoServer = await MongoMemoryServer.create();

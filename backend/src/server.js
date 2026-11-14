@@ -101,7 +101,7 @@ app.use(async (req, res, next) => {
     next();
   } catch (err) {
     console.error('[DB Middleware Error]', err.message);
-    next(err);
+    next();
   }
 });
 
