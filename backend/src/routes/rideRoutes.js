@@ -21,6 +21,20 @@ const { rideOfferLimiter } = require('../middleware/rateLimiter');
 router.get('/search', searchRides);
 router.get('/popular', getPopularRoutes);
 
+// Database reset & reseed endpoint
+router.post('/reset-database', async (req, res, next) => {
+  try {
+    const { seedData } = require('../utils/seedData');
+    await seedData();
+    res.status(200).json({
+      success: true,
+      message: 'Backend database wiped clean and reseeded successfully with fresh campus data!',
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Broadcast ride request endpoints (Notify all registered drivers)
 router.post('/broadcast-request', (req, res, next) => {
   if (req.headers.authorization) return protect(req, res, next);

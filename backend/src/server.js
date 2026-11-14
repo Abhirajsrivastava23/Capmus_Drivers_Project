@@ -115,11 +115,11 @@ const startServer = async () => {
   try {
     await connectDB();
 
-    // Auto-seed if database is freshly started
+    // Auto-seed if database is freshly started or FORCE_RESEED is set
     const User = require('./models/User');
     const userCount = await User.countDocuments();
-    if (userCount === 0) {
-      console.log('[Server] Database is empty. Running initial seedData...');
+    if (userCount === 0 || process.env.FORCE_RESEED === 'true') {
+      console.log('[Server] Running clean initial seedData...');
       const { seedData } = require('./utils/seedData');
       await seedData();
     } else {
