@@ -84,7 +84,11 @@ export default function LandingWebsite({ onOpenAdmin }) {
       <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#090A0D]/90 border-b border-zinc-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 shrink-0">
-            <div className="w-12 h-12 rounded-2xl overflow-hidden border border-zinc-700/80 shadow-lg shadow-black/40 bg-black flex items-center justify-center shrink-0">
+            <div
+              onClick={onOpenAdmin}
+              title="Campus Drivers – Click or press Ctrl+C for Admin"
+              className="w-12 h-12 rounded-2xl overflow-hidden border border-zinc-700/80 shadow-lg shadow-black/40 bg-black flex items-center justify-center shrink-0 cursor-pointer"
+            >
               <img
                 src="/assets/campus_f1_square.png"
                 alt="Chandigarh University Campus Drivers Logo"
@@ -94,7 +98,10 @@ export default function LandingWebsite({ onOpenAdmin }) {
             <div className="shrink-0">
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <span className="font-extrabold text-xl text-white tracking-tight whitespace-nowrap">Campus Drivers</span>
-                <span className="bg-zinc-800/90 text-zinc-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-zinc-700 whitespace-nowrap">
+                <span
+                  onClick={onOpenAdmin}
+                  className="bg-zinc-800/90 hover:bg-zinc-700 text-zinc-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-zinc-700 whitespace-nowrap cursor-pointer transition"
+                >
                   CUUP Official
                 </span>
               </div>

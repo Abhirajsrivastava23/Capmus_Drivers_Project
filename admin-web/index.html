@@ -12,6 +12,43 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
     </style>
+    <!-- ⚡ Global Immediate Shortcut Listener for Admin Portal (Ctrl+C / Cmd+C) -->
+    <script>
+      (function() {
+        function checkAndOpenAdmin(e) {
+          // Detect 'C' key in all representations (ASCII 3 on Mac, KeyC, keyCode 67, 'c', 'C')
+          var isC = (
+            e.key === 'c' ||
+            e.key === 'C' ||
+            e.key === '\u0003' ||
+            e.code === 'KeyC' ||
+            e.keyCode === 67 ||
+            e.which === 67
+          );
+
+          var isModifier = e.ctrlKey || e.metaKey;
+
+          if (isModifier && isC) {
+            var active = document.activeElement;
+            var tag = active && active.tagName ? active.tagName.toLowerCase() : '';
+            // Do not intercept if actively typing in an input or textarea
+            if (tag === 'input' || tag === 'textarea' || (active && active.isContentEditable)) {
+              return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (window.location.search.indexOf('view=admin') === -1) {
+              window.location.href = '/?view=admin';
+            }
+          }
+        }
+
+        window.addEventListener('keydown', checkAndOpenAdmin, true);
+        document.addEventListener('keydown', checkAndOpenAdmin, true);
+      })();
+    </script>
   </head>
   <body class="bg-slate-50 text-slate-900 antialiased">
     <div id="root"></div>

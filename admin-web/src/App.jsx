@@ -182,7 +182,9 @@ export default function App() {
   const handleOpenAdmin = () => {
     setViewMode('admin');
     if (typeof window !== 'undefined' && window.history) {
-      window.history.pushState({}, '', '?view=admin');
+      if (window.location.search.indexOf('view=admin') === -1) {
+        window.history.pushState({}, '', '?view=admin');
+      }
     }
   };
 
@@ -193,33 +195,54 @@ export default function App() {
     }
   };
 
-  // ⌨️ Global Shortcut: Ctrl+C (and Cmd+C without text selection) opens Admin Portal
+  // Sync with browser navigation and popstate
+  useEffect(() => {
+    const handlePopState = () => {
+      const search = new URLSearchParams(window.location.search);
+      if (search.get('view') === 'admin' || window.location.pathname.startsWith('/admin')) {
+        setViewMode('admin');
+      } else {
+        setViewMode('website');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // ⌨️ Global Shortcut: Ctrl+C and Cmd+C (Capture phase) opens Admin Portal
   useEffect(() => {
     const handleKeyDown = (e) => {
-      const isC = e.key === 'c' || e.key === 'C' || e.code === 'KeyC' || e.keyCode === 67;
+      const isC =
+        e.key === 'c' ||
+        e.key === 'C' ||
+        e.key === '\u0003' ||
+        e.code === 'KeyC' ||
+        e.keyCode === 67 ||
+        e.which === 67;
 
-      // 1. Direct Ctrl+C (Dedicated shortcut on Mac & Windows)
-      if (e.ctrlKey && isC) {
-        e.preventDefault();
-        handleOpenAdmin();
-        return;
-      }
+      const isModifier = e.ctrlKey || e.metaKey;
 
-      // 2. Cmd+C on Mac when not copying text in an input
-      if (e.metaKey && isC) {
+      if (isModifier && isC) {
         const activeTag = document.activeElement?.tagName?.toLowerCase();
-        const isInput = activeTag === 'input' || activeTag === 'textarea' || document.activeElement?.isContentEditable;
-        const selectedText = window.getSelection()?.toString();
+        const isInput =
+          activeTag === 'input' ||
+          activeTag === 'textarea' ||
+          document.activeElement?.isContentEditable;
 
-        if (!isInput && (!selectedText || selectedText.trim().length === 0)) {
+        if (!isInput) {
           e.preventDefault();
+          e.stopPropagation();
           handleOpenAdmin();
         }
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown, true);
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown, true);
+      document.removeEventListener('keydown', handleKeyDown, true);
+    };
   }, []);
 
   if (viewMode === 'website') {
