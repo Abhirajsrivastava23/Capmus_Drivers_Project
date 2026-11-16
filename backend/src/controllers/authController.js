@@ -57,8 +57,16 @@ exports.register = async (req, res, next) => {
     const cleanPhone = phone.trim();
     const cleanStudentId = student_id.toUpperCase().trim();
 
-    // 1. Check if this exact email already exists -> STRICTLY DO NOT LOGIN, SHOW ALREADY REGISTERED!
-    const existingEmail = await User.findOne({ email: cleanEmail });
+    // 1 & 2. Fast combined lookup for existing email, phone, or student ID
+    const existingUsers = await User.find({
+      $or: [
+        { email: cleanEmail },
+        { phone: cleanPhone },
+        { student_id: cleanStudentId },
+      ],
+    });
+
+    const existingEmail = existingUsers.find((u) => u.email === cleanEmail);
     if (existingEmail) {
       return res.status(400).json({
         success: false,
@@ -68,9 +76,8 @@ exports.register = async (req, res, next) => {
       });
     }
 
-    // 2. Check if phone or student ID exists
-    const existingPhone = await User.findOne({ phone: cleanPhone });
-    const existingStudentId = await User.findOne({ student_id: cleanStudentId });
+    const existingPhone = existingUsers.find((u) => u.phone === cleanPhone);
+    const existingStudentId = existingUsers.find((u) => u.student_id === cleanStudentId);
     const existingUser = existingPhone || existingStudentId;
 
     if (existingUser) {
@@ -133,19 +140,20 @@ exports.register = async (req, res, next) => {
 
     const token = generateToken(user._id);
 
-    // Initial welcome notification
-    await Notification.create({
+    // Initial welcome notification (async / non-blocking so response is fast)
+    Notification.create({
       user_id: user._id,
       title: 'Welcome to Campus Drivers!',
       body: 'Welcome to Chandigarh University UP ride-sharing! Please upload your Student ID Card in Verification to unlock carpooling.',
       type: 'verification_update',
-    });
+    }).catch((err) => console.error('[Notification] Welcome creation error:', err.message));
 
-    await logAudit(req, 'STUDENT_REGISTERED', 'User', user._id, {
+    // Non-blocking audit log
+    logAudit(req, 'STUDENT_REGISTERED', 'User', user._id, {
       email: user.email,
       student_id: user.student_id,
       course: user.course,
-    });
+    }).catch(() => {});
 
     const io = req.app.get('io');
     if (io) {
@@ -325,7 +333,8 @@ exports.login = async (req, res, next) => {
 
     const token = generateToken(user._id);
 
-    await logAudit(req, 'USER_LOGIN', 'User', user._id, { loginId: cleanId });
+    // Non-blocking audit log
+    logAudit(req, 'USER_LOGIN', 'User', user._id, { loginId: cleanId }).catch(() => {});
 
     res.status(200).json({
       success: true,
@@ -342,7 +351,7 @@ exports.login = async (req, res, next) => {
 // @access  Private
 exports.getMe = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id);
+    const user = req.user;
     const verification = await StudentVerification.findOne({ user_id: req.user._id });
 
     res.status(200).json({

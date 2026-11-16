@@ -93,7 +93,9 @@ export default function StudentRegistrationScreen({ navigation, route }) {
       navigation.replace('MainTabs');
     } catch (err) {
       const msg =
-        err.response?.data?.message || err.message || 'Registration failed. Please check your details.';
+        err.code === 'ECONNABORTED' || (err.message && err.message.includes('timeout'))
+          ? 'Registration request timed out. Please check your connection and retry.'
+          : err.response?.data?.message || err.message || 'Registration failed. Please check your details.';
       setErrorMessage(msg);
 
       // If email or account is already registered, set state so user can navigate to Sign In

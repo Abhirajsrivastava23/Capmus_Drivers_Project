@@ -1,6 +1,22 @@
 const http = require('http');
 
-const BASE_URL = 'http://localhost:5001/api';
+let BASE_URL = 'http://localhost:5001/api';
+
+const ensureServerRunning = async () => {
+  try {
+    await request('/health');
+  } catch (err) {
+    console.log('⚡ Starting in-process Campus Drivers server for test suite...');
+    require('../src/server');
+    for (let i = 0; i < 20; i++) {
+      await new Promise((r) => setTimeout(r, 500));
+      try {
+        const h = await request('/health');
+        if (h.status === 200) return;
+      } catch (ignored) {}
+    }
+  }
+};
 
 const request = (path, method = 'GET', data = null, token = null) => {
   return new Promise((resolve, reject) => {
@@ -42,6 +58,7 @@ const request = (path, method = 'GET', data = null, token = null) => {
 };
 
 const runTests = async () => {
+  await ensureServerRunning();
   console.log('🧪 Starting Campus Drivers Comprehensive Integration Test Suite...\n');
 
   try {
@@ -51,7 +68,7 @@ const runTests = async () => {
 
     // 2. Driver Login
     const driverLogin = await request('/auth/login', 'POST', {
-      loginId: 'aarav.sharma@cumail.in',
+      loginId: 'ananya.sharma@cumail.in',
       password: 'Password@123',
     });
     console.log(`✅ [2/10] Driver Login: Status ${driverLogin.status} -> Logged in as ${driverLogin.data.user?.name}`);
@@ -141,8 +158,8 @@ const runTests = async () => {
 
     // 10. Admin Overview & Audit Logs
     const adminLogin = await request('/auth/login', 'POST', {
-      loginId: 'admin@campusdrivers.cu.ac.in',
-      password: 'Password@123',
+      loginId: 'campusdrivers000',
+      password: 'campus1010',
     });
     const adminToken = adminLogin.data.token;
     const adminOverview = await request('/admin/overview', 'GET', null, adminToken);

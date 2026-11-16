@@ -16,7 +16,11 @@ export default function LoginPage({ onBackToWebsite }) {
     try {
       await login(loginId, password);
     } catch (err) {
-      setError(err.response?.data?.message || err.message || 'Login failed. Please check credentials.');
+      const msg =
+        err.code === 'ECONNABORTED' || (err.message && err.message.includes('timeout'))
+          ? 'Sign in request timed out. Please verify backend server is running and try again.'
+          : err.response?.data?.message || err.message || 'Login failed. Please check credentials.';
+      setError(msg);
     } finally {
       setSubmitting(false);
     }

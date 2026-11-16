@@ -12,14 +12,15 @@ const apiLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// Strict limiter for authentication & OTP endpoints to prevent brute force
+// Limiter for authentication & OTP endpoints to prevent brute force
 const authLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 20,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: process.env.NODE_ENV === 'production' ? 100 : 500,
   message: {
     success: false,
-    message: 'Too many login or OTP attempts. Please wait 10 minutes before retrying.',
+    message: 'Too many login or OTP attempts. Please wait a few minutes before retrying.',
   },
+  skip: () => process.env.NODE_ENV === 'test',
   standardHeaders: true,
   legacyHeaders: false,
 });

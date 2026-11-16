@@ -11,26 +11,31 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [unreadNotifications, setUnreadNotifications] = useState(0);
 
+  const fetchUnreadNotifications = () => {
+    api.get('/notifications', { timeout: 4000 })
+      .then((nRes) => {
+        if (nRes.data?.success && typeof nRes.data.unreadCount === 'number') {
+          setUnreadNotifications(nRes.data.unreadCount);
+        }
+      })
+      .catch(() => {});
+  };
+
   const loadStoredUser = async () => {
     try {
       const storedToken = await AsyncStorage.getItem('campus_drivers_token');
       if (storedToken) {
         setToken(storedToken);
         setAuthToken(storedToken);
-        const res = await api.get('/auth/me');
-        if (res.data.success) {
+        const res = await api.get('/auth/me', { timeout: 6000 });
+        if (res.data?.success) {
           setUser(res.data.user);
           joinUserRoom(res.data.user._id);
-          try {
-            const nRes = await api.get('/notifications');
-            if (nRes.data?.success && typeof nRes.data.unreadCount === 'number') {
-              setUnreadNotifications(nRes.data.unreadCount);
-            }
-          } catch (ignored) {}
+          fetchUnreadNotifications();
         }
       }
     } catch (e) {
-      console.warn('Failed to load user session', e);
+      console.warn('Failed to load user session', e.message);
       await AsyncStorage.removeItem('campus_drivers_token');
       setAuthToken(null);
       setUser(null);
@@ -44,40 +49,43 @@ export const AuthProvider = ({ children }) => {
     loadStoredUser();
   }, []);
 
+  const loginWithSession = async (sessionToken, sessionUser) => {
+    if (sessionToken && sessionUser) {
+      await AsyncStorage.setItem('campus_drivers_token', sessionToken);
+      setAuthToken(sessionToken);
+      setToken(sessionToken);
+      setUser(sessionUser);
+      joinUserRoom(sessionUser._id);
+      fetchUnreadNotifications();
+    }
+  };
+
   const login = async (loginId, password) => {
     const res = await api.post('/auth/login', { loginId, password });
-    if (res.data.success) {
+    if (res.data?.success) {
       await AsyncStorage.setItem('campus_drivers_token', res.data.token);
       setAuthToken(res.data.token);
       setToken(res.data.token);
       setUser(res.data.user);
       joinUserRoom(res.data.user._id);
-      try {
-        const nRes = await api.get('/notifications');
-        if (nRes.data?.success && typeof nRes.data.unreadCount === 'number') {
-          setUnreadNotifications(nRes.data.unreadCount);
-        }
-      } catch (ignored) {}
+      fetchUnreadNotifications();
       return res.data;
     }
+    return res.data;
   };
 
   const register = async (userData) => {
     const res = await api.post('/auth/register', userData);
-    if (res.data.success) {
+    if (res.data?.success) {
       await AsyncStorage.setItem('campus_drivers_token', res.data.token);
       setAuthToken(res.data.token);
       setToken(res.data.token);
       setUser(res.data.user);
       joinUserRoom(res.data.user._id);
-      try {
-        const nRes = await api.get('/notifications');
-        if (nRes.data?.success && typeof nRes.data.unreadCount === 'number') {
-          setUnreadNotifications(nRes.data.unreadCount);
-        }
-      } catch (ignored) {}
+      fetchUnreadNotifications();
       return res.data;
     }
+    return res.data;
   };
 
   const refreshProfile = async () => {
@@ -108,6 +116,7 @@ export const AuthProvider = ({ children }) => {
         loading,
         isVerifiedStudent,
         login,
+        loginWithSession,
         register,
         logout,
         refreshProfile,

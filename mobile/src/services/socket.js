@@ -2,6 +2,19 @@ import { io } from 'socket.io-client';
 import { Platform } from 'react-native';
 
 const getSocketUrl = () => {
+  if (process.env.EXPO_PUBLIC_SOCKET_URL) {
+    return process.env.EXPO_PUBLIC_SOCKET_URL;
+  }
+  if (Platform.OS === 'web') {
+    if (typeof window !== 'undefined' && window.location) {
+      if (window.location.protocol.startsWith('https')) {
+        return window.location.origin;
+      }
+      const host = window.location.hostname || 'localhost';
+      return `http://${host}:5001`;
+    }
+    return 'http://localhost:5001';
+  }
   if (Platform.OS === 'android') {
     return 'http://10.0.2.2:5001';
   }

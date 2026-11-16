@@ -40,6 +40,9 @@ const io = new Server(server, {
 app.set('io', io);
 initSocketIO(io);
 
+// Trust first proxy (required for rate limiting behind reverse proxies like Vite / Vercel)
+app.set('trust proxy', 1);
+
 // Core Middleware
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: '*' }));
@@ -99,10 +102,19 @@ app.use(async (req, res, next) => {
     if (mongoose.connection.readyState !== 1) {
       await connectDB();
     }
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        success: false,
+        message: 'Database service is initializing or temporarily unavailable. Please retry in a moment.',
+      });
+    }
     next();
   } catch (err) {
     console.error('[DB Middleware Error]', err.message);
-    next();
+    return res.status(503).json({
+      success: false,
+      message: 'Database connection error: ' + err.message,
+    });
   }
 });
 
@@ -135,45 +147,57 @@ const startServer = async () => {
   try {
     await connectDB();
 
-    // Auto-seed if database is freshly started or FORCE_RESEED is set
-    const User = require('./models/User');
-    const userCount = await User.countDocuments();
-    if (userCount === 0 || process.env.FORCE_RESEED === 'true') {
-      console.log('[Server] Running clean initial seedData...');
-      const { seedData } = require('./utils/seedData');
-      await seedData();
-    } else {
-      // Ensure student name is Ananya
-      await User.updateMany(
-        { $or: [{ name: /Aarav/i }, { email: 'aarav.sharma@cumail.in' }] },
-        { name: 'Ananya Sharma' }
-      );
-
-      // Ensure dedicated admin credentials: campusdrivers000 / campus1010
-      const adminUser = await User.findOne({ role: 'admin' });
-      if (adminUser) {
-        adminUser.student_id = 'CAMPUSDRIVERS000';
-        adminUser.password = 'campus1010';
-        adminUser.name = 'Campus Drivers Administration';
-        await adminUser.save();
-        console.log('[Server] Dedicated admin account updated: campusdrivers000 / campus1010');
+    if (mongoose.connection.readyState === 1) {
+      // Auto-seed if database is freshly started or FORCE_RESEED is set
+      const User = require('./models/User');
+      const userCount = await User.countDocuments();
+      if (userCount === 0 || process.env.FORCE_RESEED === 'true') {
+        console.log('[Server] Running clean initial seedData...');
+        const { seedData } = require('./utils/seedData');
+        await seedData();
       } else {
-        await User.create({
-          name: 'Campus Drivers Administration',
-          email: 'campusdrivers000@campusdrivers.cu.ac.in',
-          phone: '9876543210',
-          student_id: 'CAMPUSDRIVERS000',
-          course: 'Office of Student Welfare & Transport',
-          semester: 'Staff',
-          password: 'campus1010',
-          verification_status: 'verified',
-          role: 'admin',
-        });
-        console.log('[Server] Dedicated admin account created: campusdrivers000 / campus1010');
+        // Ensure student name is Ananya
+        await User.updateMany(
+          { $or: [{ name: /Aarav/i }, { email: 'aarav.sharma@cumail.in' }] },
+          { name: 'Ananya Sharma' }
+        );
+
+        // Ensure dedicated admin credentials: campusdrivers000 / campus1010
+        const adminUser = await User.findOne({ role: 'admin' });
+        if (adminUser) {
+          adminUser.student_id = 'CAMPUSDRIVERS000';
+          adminUser.password = 'campus1010';
+          adminUser.name = 'Campus Drivers Administration';
+          await adminUser.save();
+          console.log('[Server] Dedicated admin account updated: campusdrivers000 / campus1010');
+        } else {
+          await User.create({
+            name: 'Campus Drivers Administration',
+            email: 'campusdrivers000@campusdrivers.cu.ac.in',
+            phone: '9876543210',
+            student_id: 'CAMPUSDRIVERS000',
+            course: 'Office of Student Welfare & Transport',
+            semester: 'Staff',
+            password: 'campus1010',
+            verification_status: 'verified',
+            role: 'admin',
+          });
+          console.log('[Server] Dedicated admin account created: campusdrivers000 / campus1010');
+        }
       }
+    } else {
+      console.warn('[Server] Database not connected at launch. Incoming requests will connect on-demand.');
     }
 
     if (!process.env.VERCEL) {
+      server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+          console.warn(`[Server] Port ${PORT} is already in use by an active instance. Serving on existing process.`);
+        } else {
+          console.error('[Server Error]', err);
+        }
+      });
+
       server.listen(PORT, () => {
         console.log('========================================================');
         console.log(`🚀 Campus Drivers Backend Server is LIVE on port ${PORT}`);

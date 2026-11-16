@@ -17,7 +17,7 @@ import { COLORS } from '../constants/theme';
 import api from '../services/api';
 
 export default function LoginScreen({ navigation }) {
-  const { login } = useAuth();
+  const { login, loginWithSession } = useAuth();
   const [loginMethod, setLoginMethod] = useState('password'); // 'password' or 'otp'
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
@@ -41,9 +41,11 @@ export default function LoginScreen({ navigation }) {
       await login(loginId, password);
       navigation.replace('MainTabs');
     } catch (err) {
-      setErrorMessage(
-        err.response?.data?.message || err.message || 'Invalid credentials. Please verify and try again.'
-      );
+      const msg =
+        err.code === 'ECONNABORTED' || (err.message && err.message.includes('timeout'))
+          ? 'Sign in timed out. Please check your connection and try again.'
+          : err.response?.data?.message || err.message || 'Invalid credentials. Please verify and try again.';
+      setErrorMessage(msg);
     } finally {
       setLoading(false);
     }
@@ -64,7 +66,11 @@ export default function LoginScreen({ navigation }) {
       }
       Alert.alert('OTP Sent', `Verification code sent to ${phone}. (Dev code: ${res.data.dev_otp || '123456'})`);
     } catch (err) {
-      setErrorMessage(err.response?.data?.message || 'Failed to send OTP.');
+      const msg =
+        err.code === 'ECONNABORTED' || (err.message && err.message.includes('timeout'))
+          ? 'OTP request timed out. Please retry.'
+          : err.response?.data?.message || 'Failed to send OTP.';
+      setErrorMessage(msg);
     } finally {
       setLoading(false);
     }
@@ -80,13 +86,17 @@ export default function LoginScreen({ navigation }) {
     try {
       const res = await api.post('/auth/verify-otp', { phone, otp });
       if (res.data.isExistingUser && res.data.token) {
-        await login(res.data.user.email, 'Password@123');
+        await loginWithSession(res.data.token, res.data.user);
         navigation.replace('MainTabs');
       } else {
         navigation.navigate('Register', { prefilledPhone: phone });
       }
     } catch (err) {
-      setErrorMessage(err.response?.data?.message || 'Invalid OTP code.');
+      const msg =
+        err.code === 'ECONNABORTED' || (err.message && err.message.includes('timeout'))
+          ? 'OTP verification timed out. Please retry.'
+          : err.response?.data?.message || 'Invalid OTP code.';
+      setErrorMessage(msg);
     } finally {
       setLoading(false);
     }

@@ -27,6 +27,16 @@ console.log(`Replaced ${expoMatches} "/_expo/" occurrences with "./_expo/"`);
 
 fs.writeFileSync(jsFile, code);
 
+// Patch API_BASE to prevent timeout against dead domains or private IPs
+const deadDomainTarget = "const s=_e.CLOUD_API_BASE='https://capmusdriversproject.vercel.app/api',n=_e.LOCAL_WIFI_BASE='http://192.168.51.113:5001/api',c=_e.API_BASE='localhost'===window.location.hostname||'127.0.0.1'===window.location.hostname?'http://localhost:5001/api':s,l=t.default.create({baseURL:c,headers:{'Content-Type':'application/json'},timeout:1e4});_e.setAuthToken=e=>{e?l.defaults.headers.common.Authorization=`Bearer ${e}`:delete l.defaults.headers.common.Authorization},l.interceptors.request.use(async e=>{try{const t=await o.default.getItem('campus_drivers_token');t&&(e.headers.Authorization=`Bearer ${t}`)}catch(e){console.warn('Error reading token from AsyncStorage',e)}return e}),l.interceptors.response.use(e=>e,async e=>{const t=e.config;return!t||t._retry||500!==e.response?.status&&'ERR_NETWORK'!==e.code&&e.response||(t._retry=!0,t.baseURL!==s)?Promise.reject(e):(console.log('[API] Falling back to local WiFi backend:',n),t.baseURL=n,l.request(t))})";
+const dynamicApiReplacement = "const s=_e.CLOUD_API_BASE=(typeof window!=='undefined'&&window.location&&window.location.origin)?window.location.origin+'/api':'/api',n=_e.LOCAL_WIFI_BASE=(typeof window!=='undefined'&&window.location&&window.location.hostname)?'http://'+window.location.hostname+':5001/api':'http://localhost:5001/api',c=_e.API_BASE=(typeof window!=='undefined'&&window.location)?(window.location.port==='8081'||window.location.port==='19006'?n:(window.location.origin?window.location.origin+'/api':'/api')):'http://localhost:5001/api',l=t.default.create({baseURL:c,headers:{'Content-Type':'application/json'},timeout:15e3});_e.setAuthToken=e=>{e?l.defaults.headers.common.Authorization=`Bearer ${e}`:delete l.defaults.headers.common.Authorization},l.interceptors.request.use(async e=>{try{const t=await o.default.getItem('campus_drivers_token');t&&(e.headers.Authorization=`Bearer ${t}`)}catch(e){console.warn('Error reading token from AsyncStorage',e)}return e}),l.interceptors.response.use(e=>e,async e=>{const t=e.config;if(t&&!t._retry&&(e.code==='ERR_NETWORK'||!e.response)){t._retry=!0;if(typeof window!=='undefined'&&t.baseURL!==n&&window.location.port!=='5001'){console.log('[API] Retrying on backend port 5001:',n);t.baseURL=n;return l.request(t);}}return Promise.reject(e);})";
+
+if (code.includes(deadDomainTarget)) {
+  code = code.replace(deadDomainTarget, dynamicApiReplacement);
+  fs.writeFileSync(jsFile, code);
+  console.log('Patched dynamic API_BASE in AppEntry bundle');
+}
+
 // 2. Build Base64 fonts.css
 const fontsDir = path.join(distDir, 'assets/node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts');
 function getB64(file) {

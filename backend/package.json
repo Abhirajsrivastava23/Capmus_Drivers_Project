@@ -8,7 +8,10 @@
     "build": "node -e \"console.log('Backend build ready')\"",
     "dev": "nodemon src/server.js",
     "seed": "node src/utils/seedData.js",
-    "test": "node tests/api.test.js"
+    "test": "node tests/unit.test.js && node tests/acceptance.test.js && node tests/integration.test.js",
+    "test:unit": "node tests/unit.test.js",
+    "test:acceptance": "node tests/acceptance.test.js",
+    "test:integration": "node tests/integration.test.js"
   },
   "keywords": [
     "carpooling",
